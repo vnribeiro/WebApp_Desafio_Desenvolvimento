@@ -6,4 +6,4 @@
 ## Informações do Projeto
 
 - **Versão do .NET**: 6.0
-- **Banco de Dados**: SQL Server
+- **Banco de Dados**: SQLite 
