@@ -1,7 +1,7 @@
 # Desafio Desenvolvimento
 
 ## Links
-- [Desafio](DESAFIO.md)
+- <a href="DESAFIO.md" target="_blank">Desafio</a>
 
 ## Informações do Projeto
 
