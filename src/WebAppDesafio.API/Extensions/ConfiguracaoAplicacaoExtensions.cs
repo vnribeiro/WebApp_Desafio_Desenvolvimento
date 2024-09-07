@@ -1,6 +1,8 @@
 ﻿using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using WebAppDesafio.API.Infra.Dados;
 
 namespace WebAppDesafio.API.Extensions;
 
@@ -48,10 +50,10 @@ public static class ConfiguracaoAplicacaoExtensions
             {
                 c.SwaggerDoc(description.GroupName, new OpenApiInfo
                 {
-                    Title = $"WebAppDesafio API {description.ApiVersion}",
+                    Title = $"WebApp_Desafio_API {description.ApiVersion}",
                     Version = description.ApiVersion.ToString(),
-                    Description = "API de comunicação NetSpeed - Vinícius Ribeiro",
-                    Contact = new OpenApiContact() { Name = "NetSpeed - Vinícius Ribeiro", Email = "netspeed@teste.com" },
+                    Description = "API de comunicação WebApp_Desafio_Desenvolvimento.",
+                    Contact = new OpenApiContact() { Name = "Netspeed", Email = "contato@netspeed.com.br" },
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org.licenses/MIT") },
                 });
             }
@@ -101,6 +103,22 @@ public static class ConfiguracaoAplicacaoExtensions
 
         if (builder.Environment.IsDevelopment())
             builder.Configuration.AddUserSecrets<Program>();
+
+        return builder;
+    }
+
+    /// <summary>
+    /// Configura a aplicação para usar SQLite como o provedor de banco de dados.
+    /// </summary>
+    /// <param name="builder">O WebApplicationBuilder a ser configurado.</param>
+    public static WebApplicationBuilder ConfigurarSqLite(this WebApplicationBuilder builder)
+    {
+        var connectionString = builder.Configuration.GetConnectionString(DefaultConnection);
+
+        builder.Services.AddDbContext<AppDbContext>(options =>
+        {
+            options.UseSqlite(connectionString);
+        });
 
         return builder;
     }

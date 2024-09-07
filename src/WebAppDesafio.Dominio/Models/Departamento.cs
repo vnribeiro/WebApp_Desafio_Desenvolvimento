@@ -13,6 +13,11 @@ public class Departamento : Entity, IAggregateRoot
         Descricao = descricao;
     }
 
-    [Required(ErrorMessage = "A Descricao é obrigatória")]
+    public Departamento(Guid id, string descricao)
+    {
+        base.Id = id;
+        Descricao = descricao;
+    }
+
     public string Descricao { get; private set; }
 }

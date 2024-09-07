@@ -11,8 +11,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configura as configurações de ambiente
-builder.ConfigurarAmbiente();
+// Configura o ambiente
+// e o banco de dados
+builder
+    .ConfigurarAmbiente()
+    .ConfigurarSqLite();
 
 // Adiciona o versionamento da API
 // e a configuração do Swagger
@@ -20,6 +23,12 @@ builder
     .Services
     .ConfigurarVersionamentoApi()
     .ConfigurarSwagger();
+
+// Adiciona os serviços de
+// repositório e de aplicação
+builder.Services
+    .AddRepositorios()
+    .AddServicos();
 
 // Você pode adicionar provedores de logging adicionais,
 // como logging em arquivos ou serviços de logging externos, se desejar.
@@ -50,7 +59,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 // Register middleware for handling exceptions
-app.UseMiddleware<MiddlewareTratamentoExcecoes>();
+app.UseMiddleware<TratamentoExcecoesMiddleware>();
 
 app.MapControllers();
 

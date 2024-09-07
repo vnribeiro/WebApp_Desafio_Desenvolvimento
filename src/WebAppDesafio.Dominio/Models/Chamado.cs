@@ -16,10 +16,17 @@ public class Chamado : Entity, IAggregateRoot
         DataAbertura = dataAbertura;
     }
 
-    [Required(ErrorMessage = "O Assunto é obrigatório")]
+    public Chamado(Guid id, string assunto, string solicitante, Departamento departamento, DateTime dataAbertura)
+    {
+        base.Id = id;
+        Assunto = assunto;
+        Solicitante = solicitante;
+        Departamento = departamento;
+        DataAbertura = dataAbertura;
+    }
+
     public string Assunto { get; private set; }
 
-    [Required(ErrorMessage = "O Solicitante é obrigatório")]
     public string Solicitante { get; private set; }
 
     public Departamento Departamento { get; private set; }
