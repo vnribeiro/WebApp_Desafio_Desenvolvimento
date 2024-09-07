@@ -1,10 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebAppDesafio.MVC.Infra.Clients;
 using WebAppDesafio.MVC.ViewModels;
 
 namespace WebAppDesafio.MVC.Controllers
 {
     public class DepartamentosController : Controller
     {
+        private readonly DepartamentoClient _departamentoClient;
+
+        public DepartamentosController(DepartamentoClient departamentoClient)
+        {
+            _departamentoClient = departamentoClient;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -19,20 +27,19 @@ namespace WebAppDesafio.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Datatable()
+        public async Task<IActionResult> Datatable()
         {
             try
             {
-                var departamentosApiClient = new DepartamentosApiClient();
-                var lstDepartamentos = departamentosApiClient.DepartamentosListar();
+                var response = await _departamentoClient.GetDepartamentos();
 
-                var dataTableVM = new DataTableAjaxViewModel()
+                var dataTableVm = new DataTableAjaxViewModel()
                 {
-                    length = lstDepartamentos.Count,
-                    data = lstDepartamentos
+                    length = response.Dados.Count(),
+                    data = response.Dados
                 };
 
-                return Ok(dataTableVM);
+                return Ok(dataTableVm);
             }
             catch (Exception ex)
             {

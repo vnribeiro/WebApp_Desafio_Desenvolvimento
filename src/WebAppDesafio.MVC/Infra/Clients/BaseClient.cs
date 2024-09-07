@@ -13,7 +13,7 @@ public abstract class BaseClient
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
 
-        return new StringContent(JsonSerializer.SerializeAsync(obj, options), Encoding.UTF8, "application/json");
+        return new StringContent(JsonSerializer.Serialize(obj, options), Encoding.UTF8, "application/json");
     }
 
     protected T? ConverterParaObj<T>(string json)

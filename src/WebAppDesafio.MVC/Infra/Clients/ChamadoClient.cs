@@ -28,20 +28,16 @@ public class ChamadoClient : BaseClient
             }
         }
 
-        return new CustomResponse<ChamadoViewModel>
-        {
-            Sucesso = false,
-            Mensagem = "Erro ao obter chamado."
-        };
+        throw new ApplicationException("Erro ao obter chamado.");
     }
 
-    public async Task<CustomResponse<ChamadoViewModel>> GetChamados()
+    public async Task<CustomResponse<IEnumerable<ChamadoViewModel>>> GetChamados()
     {
         var response = await _httpClient.GetAsync($"api/v1/chamados");
 
         if (response.IsSuccessStatusCode)
         {
-            var result = ConverterParaObj<CustomResponse<ChamadoViewModel>>(await response.Content.ReadAsStringAsync());
+            var result = ConverterParaObj<CustomResponse<IEnumerable<ChamadoViewModel>>>(await response.Content.ReadAsStringAsync());
 
             if (result is { Sucesso: true })
             {
@@ -49,11 +45,7 @@ public class ChamadoClient : BaseClient
             }
         }
 
-        return new CustomResponse<ChamadoViewModel>
-        {
-            Sucesso = false,
-            Mensagem = "Erro ao obter chamados."
-        };
+        throw new ApplicationException("Erro ao obter chamados.");
     }
 
     public async Task<CustomResponse<ChamadoViewModel>> CriarChamado(CriarChamadoViewModel chamado)
@@ -71,11 +63,7 @@ public class ChamadoClient : BaseClient
             }
         }
 
-        return new CustomResponse<ChamadoViewModel>
-        {
-            Sucesso = false,
-            Mensagem = "Erro ao cadastrar chamado."
-        };
+        throw new ApplicationException("Erro ao criar chamado.");
     }
 
     public async Task<CustomResponse<ChamadoViewModel>> AtualizarChamado(Guid id, AtualizarChamadoViewModel chamado)
@@ -93,11 +81,7 @@ public class ChamadoClient : BaseClient
             }
         }
 
-        return new CustomResponse<ChamadoViewModel>
-        {
-            Sucesso = false,
-            Mensagem = "Erro ao atualizar chamado."
-        };
+        throw new ApplicationException("Erro ao atualizar chamado.");
     }
 
     public async Task<CustomResponse<ChamadoViewModel>> ExcluirChamado(Guid id)
@@ -114,11 +98,7 @@ public class ChamadoClient : BaseClient
             }
         }
 
-        return new CustomResponse<ChamadoViewModel>
-        {
-            Sucesso = false,
-            Mensagem = "Erro ao excluir chamado."
-        };
+        throw new ApplicationException("Erro ao excluir chamado.");
     }
 }
 

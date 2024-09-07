@@ -1,7 +1,13 @@
+using WebAppDesafio.MVC.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Configura os clients para acessar as APIs
+builder.Services
+    .ConfigurarClients();
 
 var app = builder.Build();
 

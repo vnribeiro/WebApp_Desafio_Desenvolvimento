@@ -22,38 +22,30 @@ public class DepartamentoClient : BaseClient
         {
             var result = ConverterParaObj<CustomResponse<DepartamentoViewModel>>(await response.Content.ReadAsStringAsync());
 
-            if (result is { Sucesso: true })
+            if (result != null)
             {
                 return result;
             }
         }
 
-        return new CustomResponse<DepartamentoViewModel>
-        {
-            Sucesso = false,
-            Mensagem = "Erro ao obter departamento."
-        };
+        throw new ApplicationException("Erro ao obter departamento.");
     }
 
-    public async Task<CustomResponse<DepartamentoViewModel>> GetDepartamentos()
+    public async Task<CustomResponse<IEnumerable<DepartamentoViewModel>>> GetDepartamentos()
     {
         var response = await _httpClient.GetAsync($"api/v1/departamentos");
 
         if (response.IsSuccessStatusCode)
         {
-            var result = ConverterParaObj<CustomResponse<DepartamentoViewModel>>(await response.Content.ReadAsStringAsync());
+            var result = ConverterParaObj<CustomResponse<IEnumerable<DepartamentoViewModel>>>(await response.Content.ReadAsStringAsync());
 
-            if (result is { Sucesso: true })
+            if (result != null)
             {
                 return result;
             }
         }
 
-        return new CustomResponse<DepartamentoViewModel>
-        {
-            Sucesso = false,
-            Mensagem = "Erro ao obter departamentos."
-        };
+        throw new ApplicationException("Erro ao obter departamentos.");
     }
 
     public async Task<CustomResponse<DepartamentoViewModel>> CriarDepartamento(CriarDepartamentoViewModel departamento)
@@ -65,17 +57,13 @@ public class DepartamentoClient : BaseClient
         {
             var result = ConverterParaObj<CustomResponse<DepartamentoViewModel>>(await response.Content.ReadAsStringAsync());
 
-            if (result is { Sucesso: true })
+            if (result != null)
             {
                 return result;
             }
         }
 
-        return new CustomResponse<DepartamentoViewModel>
-        {
-            Sucesso = false,
-            Mensagem = "Erro ao cadastrar departamento."
-        };
+        throw new ApplicationException("Erro ao criar departamento.");
     }
 
     public async Task<CustomResponse<DepartamentoViewModel>> AtualizarDepartamento(Guid id, AtualizarDepartamentoViewModel departamento)
@@ -93,11 +81,7 @@ public class DepartamentoClient : BaseClient
             }
         }
 
-        return new CustomResponse<DepartamentoViewModel>
-        {
-            Sucesso = false,
-            Mensagem = "Erro ao atualizar departamento."
-        };
+        throw new ApplicationException("Erro ao atualizar departamento.");
     }
 
     public async Task<CustomResponse<DepartamentoViewModel>> ExcluirDepartamento(Guid id)
@@ -113,12 +97,8 @@ public class DepartamentoClient : BaseClient
                 return result;
             }
         }
-
-        return new CustomResponse<DepartamentoViewModel>
-        {
-            Sucesso = false,
-            Mensagem = "Erro ao excluir departamento."
-        };
+        
+        throw new ApplicationException("Erro ao excluir departamento.");
     }
 }
 

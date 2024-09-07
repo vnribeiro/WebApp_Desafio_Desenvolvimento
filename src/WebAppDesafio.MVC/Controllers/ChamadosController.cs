@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCore.Reporting;
+using Microsoft.AspNetCore.Mvc;
+using Shared.ViewModels.Criar;
+using WebAppDesafio.MVC.Infra.Clients;
 using WebAppDesafio.MVC.ViewModels;
 using WebAppDesafio.MVC.ViewModels.Enums;
 
@@ -6,6 +9,18 @@ namespace WebAppDesafio.MVC.Controllers
 {
     public class ChamadosController : Controller
     {
+        private readonly IHostEnvironment? _hostEnvironment;
+        private readonly ChamadoClient _chamadoClient;
+        private readonly DepartamentoClient _departamentoClient;
+
+        public ChamadosController(IHostEnvironment? hostEnvironment, 
+            ChamadoClient chamadoClient, 
+            DepartamentoClient departamentoClient)
+        {
+            _hostEnvironment = hostEnvironment;
+            _chamadoClient = chamadoClient;
+            _departamentoClient = departamentoClient;
+        }
 
         [HttpGet]
         public IActionResult Index()
@@ -21,20 +36,19 @@ namespace WebAppDesafio.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Datatable()
+        public async Task<IActionResult> Datatable()
         {
             try
             {
-                var chamadosApiClient = new ChamadosApiClient();
-                var lstChamados = chamadosApiClient.ChamadosListar();
+                var chamados = await _chamadoClient.GetChamados();
 
-                var dataTableVM = new DataTableAjaxViewModel()
+                var dataTableVm = new DataTableAjaxViewModel()
                 {
-                    length = lstChamados.Count,
-                    data = lstChamados
+                    length = chamados.Dados.Count(),
+                    data = chamados
                 };
 
-                return Ok(dataTableVM);
+                return Ok(dataTableVm);
             }
             catch (Exception ex)
             {
@@ -43,37 +57,48 @@ namespace WebAppDesafio.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Cadastrar()
+        public async Task<IActionResult> Cadastrar()
         {
-            var chamadoVM = new ChamadoViewModel()
+            var chamadoVm = new ChamadoViewModel()
             {
                 DataAbertura = DateTime.Now
             };
+
             ViewData["Title"] = "Cadastrar Novo Chamado";
 
             try
             {
-                var departamentosApiClient = new DepartamentosApiClient();
-
-                ViewData["ListaDepartamentos"] = departamentosApiClient.DepartamentosListar();
+                ViewData["ListaDepartamentos"] = await _departamentoClient.GetDepartamentos();
             }
             catch (Exception ex)
             {
                 ViewData["Error"] = ex.Message;
             }
 
-            return View("Cadastrar", chamadoVM);
+            return View("Cadastrar", chamadoVm);
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(ChamadoViewModel chamadoVM)
+        public async Task<IActionResult> Cadastrar(ChamadoViewModel chamadoVm)
         {
             try
             {
-                var chamadosApiClient = new ChamadosApiClient();
-                var realizadoComSucesso = chamadosApiClient.ChamadoGravar(chamadoVM);
+                var chamado = new CriarChamadoViewModel
+                {
+                    Solicitante = chamadoVm.Solicitante,
+                    Assunto = chamadoVm.Assunto,
 
-                if (realizadoComSucesso)
+                    Departamento = new CriarDepartamentoViewModel
+                    {
+                        Descricao = chamadoVm.Departamento.Descricao
+                    },
+
+                    DataAbertura = chamadoVm.DataAbertura,
+                };
+
+                var response = await _chamadoClient.CriarChamado(chamado);
+
+                if (response.Sucesso)
                     return Ok(new ResponseViewModel(
                                 $"Chamado gravado com sucesso!",
                                 AlertTypes.success,
@@ -89,19 +114,17 @@ namespace WebAppDesafio.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Editar([FromRoute] int id)
+        public async Task<IActionResult> Editar([FromRoute] Guid id)
         {
             ViewData["Title"] = "Cadastrar Novo Chamado";
 
             try
             {
-                var chamadosApiClient = new ChamadosApiClient();
-                var chamadoVM = chamadosApiClient.ChamadoObter(id);
+                var response = await _chamadoClient.GetChamado(id);
 
-                var departamentosApiClient = new DepartamentosApiClient();
-                ViewData["ListaDepartamentos"] = departamentosApiClient.DepartamentosListar();
+                ViewData["ListaDepartamentos"] = _departamentoClient.GetDepartamentos();
 
-                return View("Cadastrar", chamadoVM);
+                return View("Cadastrar", response.Dados);
             }
             catch (Exception ex)
             {
@@ -110,14 +133,13 @@ namespace WebAppDesafio.MVC.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Excluir([FromRoute] int id)
+        public async Task<IActionResult> Excluir([FromRoute] Guid id)
         {
             try
             {
-                var chamadosApiClient = new ChamadosApiClient();
-                var realizadoComSucesso = chamadosApiClient.ChamadoExcluir(id);
+                var response = await _chamadoClient.ExcluirChamado(id);
 
-                if (realizadoComSucesso)
+                if (response.Sucesso)
                     return Ok(new ResponseViewModel(
                                 $"Chamado {id} excluído com sucesso!",
                                 AlertTypes.success,
@@ -133,22 +155,21 @@ namespace WebAppDesafio.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Report()
+        public async Task<IActionResult> Report()
         {
-            string mimeType = string.Empty;
-            int extension = 1;
-            string contentRootPath = _hostEnvironment.ContentRootPath;
-            string path = Path.Combine(contentRootPath, "wwwroot", "reports", "rptChamados.rdlc");
+            var mimeType = string.Empty;
+            var extension = 1;
+            var contentRootPath = _hostEnvironment.ContentRootPath;
+            var path = Path.Combine(contentRootPath, "wwwroot", "reports", "rptChamados.rdlc");
             //
             // ... parameters
             //
-            LocalReport localReport = new LocalReport(path);
+            var localReport = new LocalReport(path);
 
             // Carrega os dados que serão apresentados no relatório
-            var chamadosApiClient = new ChamadosApiClient();
-            var lstChamados = chamadosApiClient.ChamadosListar();
+            var response = await _chamadoClient.GetChamados();
 
-            localReport.AddDataSource("dsChamados", lstChamados);
+            localReport.AddDataSource("dsChamados", response.Dados);
 
             // Renderiza o relatório em PDF
             ReportResult reportResult = localReport.Execute(RenderType.Pdf);
