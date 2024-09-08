@@ -23,12 +23,20 @@ namespace WebAppDesafio.MVC.Controllers
             _departamentoClient = departamentoClient;
         }
 
+        /// <summary>
+        /// Redireciona para a ação Listar.
+        /// </summary>
+        /// <returns>Redirecionamento para a ação Listar.</returns>
         [HttpGet]
         public IActionResult Index()
         {
             return RedirectToAction(nameof(Listar));
         }
 
+        /// <summary>
+        /// Retorna a view para listar chamados.
+        /// </summary>
+        /// <returns>View para listar chamados.</returns>
         [HttpGet]
         public IActionResult Listar()
         {
@@ -36,6 +44,10 @@ namespace WebAppDesafio.MVC.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Obtém os dados dos chamados para o DataTable.
+        /// </summary>
+        /// <returns>Dados dos chamados em formato JSON.</returns>
         [HttpGet]
         public async Task<IActionResult> Datatable()
         {
@@ -57,6 +69,10 @@ namespace WebAppDesafio.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Retorna a view para cadastrar um novo chamado.
+        /// </summary>
+        /// <returns>View para cadastrar um novo chamado.</returns>
         [HttpGet]
         public async Task<IActionResult> Cadastrar()
         {
@@ -87,6 +103,11 @@ namespace WebAppDesafio.MVC.Controllers
             return View("Cadastrar", chamadoVm);
         }
 
+        /// <summary>
+        /// Cadastra um novo chamado.
+        /// </summary>
+        /// <param name="chamadoVm">Dados do chamado a ser criado.</param>
+        /// <returns>Resultado da operação de cadastro.</returns>
         [HttpPost]
         public async Task<IActionResult> Cadastrar(ChamadoViewModel chamadoVm)
         {
@@ -121,6 +142,15 @@ namespace WebAppDesafio.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Retorna a view para editar um chamado.
+        /// </summary>
+        /// <param name="id">ID do chamado a ser editado.</param>
+        /// <param name="assunto">Assunto do chamado a ser editado.</param>
+        /// <param name="solicitante">Solicitante do chamado a ser editado.</param>
+        /// <param name="departamentoId">ID do departamento do chamado a ser editado.</param>
+        /// <param name="dataAbertura">Data de abertura do chamado a ser editado.</param>
+        /// <returns>View para editar um chamado.</returns>
         [HttpGet]
         public async Task<IActionResult> Editar([FromQuery] Guid id, 
             [FromQuery] string assunto, 
@@ -161,6 +191,12 @@ namespace WebAppDesafio.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualiza um chamado existente.
+        /// </summary>
+        /// <param name="id">ID do chamado a ser atualizado.</param>
+        /// <param name="chamadoVm">Dados do chamado a serem atualizados.</param>
+        /// <returns>Resultado da operação de atualização.</returns>
         [HttpPatch]
         public async Task<IActionResult> Atualizar([FromRoute] Guid id, [FromBody] AtualizarChamadoViewModel chamadoVm)
         {
@@ -187,6 +223,11 @@ namespace WebAppDesafio.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Exclui um chamado existente.
+        /// </summary>
+        /// <param name="id">ID do chamado a ser excluído.</param>
+        /// <returns>Resultado da operação de exclusão.</returns>
         [HttpDelete]
         public async Task<IActionResult> Excluir([FromRoute] Guid id)
         {
@@ -213,6 +254,10 @@ namespace WebAppDesafio.MVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Gera um relatório de chamados em formato PDF.
+        /// </summary>
+        /// <returns>Arquivo PDF do relatório de chamados.</returns>
         [HttpGet]
         public async Task<IActionResult> Report()
         {

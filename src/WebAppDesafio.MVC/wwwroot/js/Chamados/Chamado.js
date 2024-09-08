@@ -8,20 +8,6 @@
         autoclose: true,
         language: 'pt-BR'
     });
-
-    $('#btnCancelar').click(function () {
-        Swal.fire({
-            html: "Deseja cancelar essa operação? O registro não será salvo.",
-            type: "warning",
-            showCancelButton: true,
-        }).then(function (result) {
-            if (result.value) {
-                history.back();
-            } else {
-                console.log("Cancelou a inclusão.");
-            }
-        });
-    });
 });
 
 // Validação do formulário

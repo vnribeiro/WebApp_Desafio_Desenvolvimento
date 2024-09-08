@@ -1,6 +1,7 @@
 ﻿using Shared.ViewModels;
 using Shared.ViewModels.Atualizar;
 using Shared.ViewModels.Criar;
+using System.Net;
 using WebAppDesafio.MVC.ViewModels;
 
 namespace WebAppDesafio.MVC.Infra.Clients;
@@ -97,19 +98,18 @@ public class DepartamentoClient : BaseClient
     /// <param name="departamento">O modelo de visão contendo os dados atualizados do departamento.</param>
     /// <returns>Uma tarefa que representa a operação assíncrona. O resultado contém a resposta personalizada com o departamento atualizado.</returns>
     /// <exception cref="ApplicationException">Lançada se houver um erro ao atualizar o departamento.</exception>
-    public async Task<CustomResponse<DepartamentoViewModel>> AtualizarDepartamento(Guid id, AtualizarDepartamentoViewModel departamento)
+    public async Task<CustomResponse<DepartamentoViewModel>> AtualizarDepartamento(Guid id, DepartamentoViewModel departamento)
     {
         var content = ConverterParaJson(departamento);
-        var response = await _httpClient.PutAsync($"api/v1/departamentos/{id}", content);
+        var response = await _httpClient.PatchAsync($"api/v1/departamentos/{id}", content);
 
-        if (response.IsSuccessStatusCode)
+        if (response is { IsSuccessStatusCode: true, StatusCode: HttpStatusCode.NoContent })
         {
-            var result = ConverterParaObj<CustomResponse<DepartamentoViewModel>>(await response.Content.ReadAsStringAsync());
-
-            if (result != null)
+            return new CustomResponse<DepartamentoViewModel>
             {
-                return result;
-            }
+                Sucesso = true,
+                Mensagem = "Chamado atualizado com sucesso."
+            };
         }
 
         throw new ApplicationException("Erro ao atualizar departamento.");
@@ -125,16 +125,15 @@ public class DepartamentoClient : BaseClient
     {
         var response = await _httpClient.DeleteAsync($"api/v1/departamentos/{id}");
 
-        if (response.IsSuccessStatusCode)
+        if (response is { IsSuccessStatusCode: true, StatusCode: HttpStatusCode.NoContent })
         {
-            var result = ConverterParaObj<CustomResponse<DepartamentoViewModel>>(await response.Content.ReadAsStringAsync());
-
-            if (result != null)
+            return new CustomResponse<DepartamentoViewModel>
             {
-                return result;
-            }
+                Sucesso = true,
+                Mensagem = "Chamado atualizado com sucesso."
+            };
         }
-        
+
         throw new ApplicationException("Erro ao excluir departamento.");
     }
 }
