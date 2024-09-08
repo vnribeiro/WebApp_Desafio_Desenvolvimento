@@ -12,7 +12,7 @@ public class ChamadoMap : IEntityTypeConfiguration<Chamado>
             .ToTable("Chamados");
 
         builder
-            .HasKey(x => x.Id);
+            .HasKey(c => c.Id);
 
         builder
             .Property(x => x.Id)
@@ -20,15 +20,16 @@ public class ChamadoMap : IEntityTypeConfiguration<Chamado>
 
         builder.Property(c => c.Assunto)
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(200);
 
         builder.Property(c => c.Solicitante)
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(150);
 
         builder.Property(c => c.DataAbertura)
             .IsRequired();
 
+        // Relacionamento com Departamento (muitos para um)
         builder.HasOne(c => c.Departamento)
             .WithMany()
             .HasForeignKey("DepartamentoId")

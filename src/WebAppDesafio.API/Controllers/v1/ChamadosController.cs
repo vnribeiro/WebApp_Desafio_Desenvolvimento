@@ -5,9 +5,9 @@ using Shared.ViewModels;
 using Shared.ViewModels.Atualizar;
 using Shared.ViewModels.Criar;
 using WebAppDesafio.API.Dominio.Models;
-using WebAppDesafio.API.Infra.Dados;
 using WebAppDesafio.API.Infra.Exceptions;
 using WebAppDesafio.API.Infra.Repositorios.Interfaces;
+using WebAppDesafio.API.Servicos.Interfaces;
 
 namespace WebAppDesafio.API.Controllers.v1;
 
@@ -17,15 +17,15 @@ namespace WebAppDesafio.API.Controllers.v1;
 public class ChamadosController : MainController
 {
     private readonly IChamadoRepositorio _chamadoRepositorio;
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IChamadoServico _chamadoServico;
     private readonly ILogger<ChamadosController> _logger;
 
     public ChamadosController(IChamadoRepositorio chamadoRepositorio, 
-        IUnitOfWork unitOfWork,
+        IChamadoServico chamadoServico,
         ILogger<ChamadosController> logger)
     {
         _chamadoRepositorio = chamadoRepositorio;
-        _unitOfWork = unitOfWork;
+        _chamadoServico = chamadoServico;
         _logger = logger;
     }
 
@@ -103,12 +103,8 @@ public class ChamadosController : MainController
 
         try
         {
-            // Mapeia a viewmodel para o domínio
-            var chamado = MapCriaChamado(chamadoViewModel);
-
-            // Cria o chamado
-            await _chamadoRepositorio.AddAsync(chamado);
-            await _unitOfWork.CommitAsync();
+            // Utiliza o serviço para criar o chamado
+            var chamado = await _chamadoServico.Criar(chamadoViewModel);
 
             return CreatedAtAction(nameof(GetChamadoById),
             new { apiVersion = GetApiVersion(), id = chamado.Id },
@@ -138,7 +134,7 @@ public class ChamadosController : MainController
     /// <param name="id">ID do chamado a ser atualizado.</param>
     /// <param name="chamadoViewModel">Dados atualizados do chamado.</param>
     /// <returns>Retorna o status da operação.</returns>
-    [HttpPut("{id:guid}")]
+    [HttpPatch("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(CustomResponse<Chamado>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(CustomResponse<Chamado>), StatusCodes.Status404NotFound)]
@@ -164,12 +160,8 @@ public class ChamadosController : MainController
         }
 
         try
-        {   // Mapeia a viewmodel para o domínio
-            var chamado = MapAtualizarChamado(chamadoViewModel);
-
-            // Atualiza o chamado
-            await _chamadoRepositorio.UpdateAsync(chamado);
-            await _unitOfWork.CommitAsync();
+        {
+            await _chamadoServico.Atualizar(chamadoViewModel);
             return NoContent();
         }
         catch (Exception ex)
@@ -197,8 +189,7 @@ public class ChamadosController : MainController
     {
         try
         {
-            await _chamadoRepositorio.DeleteAsync(id);
-            await _unitOfWork.CommitAsync();
+            await _chamadoServico.Remover(id);
             return NoContent();
         }
         catch (Exception ex)
@@ -211,20 +202,6 @@ public class ChamadosController : MainController
                 Mensagem = ex.Message
             });
         }
-    }
-
-    private static Chamado MapCriaChamado(CriarChamadoViewModel chamadoViewModel)
-    {
-        var departamento = new Departamento(chamadoViewModel.Departamento.Descricao);
-        var chamado = new Chamado(chamadoViewModel.Assunto, chamadoViewModel.Solicitante, departamento, chamadoViewModel.DataAbertura);
-        return chamado;
-    }
-
-    private static Chamado MapAtualizarChamado(AtualizarChamadoViewModel chamadoViewModel)
-    {
-        var departamento = new Departamento(chamadoViewModel.Departamento.Id, chamadoViewModel.Departamento.Descricao);
-        var chamado = new Chamado(chamadoViewModel.Id, chamadoViewModel.Assunto, chamadoViewModel.Solicitante, departamento, chamadoViewModel.DataAbertura);
-        return chamado;
     }
 }
 

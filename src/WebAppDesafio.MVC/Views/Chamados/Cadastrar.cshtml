@@ -34,7 +34,7 @@
                     <label class="form-label" asp-for="Departamento"></label>
                     <select data-placeholder="Selecionar" class="form-control chosen-select" asp-for="Id" readonly="readonly" id="Departamento">
                         <option value=""></option>
-                        @foreach (var item in ViewData["ListaDepartamentos"] as List<DepartamentoViewModel>)
+                        @foreach (var item in (ViewData["ListaDepartamentos"] as List<DepartamentoViewModel>)!)
                         {
                             if (item.Id == Model.Id)
                             {
@@ -80,14 +80,14 @@
 </div>
 
 @section styles
-    {
+{
     <link rel="stylesheet" href="~/lib/sweetalert2/sweetalert2.min.css" />
     @*<link rel="stylesheet" href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css" />*@
     @*<link rel="stylesheet" href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" />*@
 }
 
 @section scripts
-    {
+{
     <!-- SweetAlert2 -->
     <script src="~/lib/sweetalert2/sweetalert2.all.min.js"></script>
     <!-- Bootstrap Datepicker -->

@@ -35,8 +35,8 @@ namespace WebAppDesafio.MVC.Controllers
 
                 var dataTableVm = new DataTableAjaxViewModel()
                 {
-                    length = response.Dados.Count(),
-                    data = response.Dados
+                    Length = response.Dados.Count(),
+                    Data = response.Dados
                 };
 
                 return Ok(dataTableVm);

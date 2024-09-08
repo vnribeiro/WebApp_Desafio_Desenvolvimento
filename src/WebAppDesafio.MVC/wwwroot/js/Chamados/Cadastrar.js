@@ -33,12 +33,18 @@
 
         let chamado = SerielizeForm($('#form'));
         let url = $('#form').attr('action');
-        //debugger;
 
         $.ajax({
             type: "POST",
             url: url,
-            data: chamado,
+            data: {
+                Assunto: chamado.Assunto,
+                Solicitante: chamado.Solicitante,
+                Departamento: {
+                    Id: $('#Departamento').val()
+                },
+                DataAbertura: chamado.DataAbertura,
+            },
             success: function (result) {
 
                 Swal.fire({

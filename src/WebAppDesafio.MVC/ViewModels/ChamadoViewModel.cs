@@ -11,7 +11,7 @@ namespace WebAppDesafio.MVC.ViewModels
 
         [Display(Name = "ID")]
         [DataMember(Name = "ID")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Display(Name = "Assunto")]
         [DataMember(Name = "Assunto")]

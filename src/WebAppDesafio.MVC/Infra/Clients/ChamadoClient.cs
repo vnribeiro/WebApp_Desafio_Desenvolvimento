@@ -22,7 +22,7 @@ public class ChamadoClient : BaseClient
         {
             var result = ConverterParaObj<CustomResponse<ChamadoViewModel>>(await response.Content.ReadAsStringAsync());
 
-            if (result is { Sucesso: true })
+            if (result != null)
             {
                 return result;
             }
@@ -33,13 +33,13 @@ public class ChamadoClient : BaseClient
 
     public async Task<CustomResponse<IEnumerable<ChamadoViewModel>>> GetChamados()
     {
-        var response = await _httpClient.GetAsync($"api/v1/chamados");
+        var response = await _httpClient.GetAsync("api/v1/chamados");
 
         if (response.IsSuccessStatusCode)
         {
             var result = ConverterParaObj<CustomResponse<IEnumerable<ChamadoViewModel>>>(await response.Content.ReadAsStringAsync());
 
-            if (result is { Sucesso: true })
+            if (result != null)
             {
                 return result;
             }
@@ -51,13 +51,13 @@ public class ChamadoClient : BaseClient
     public async Task<CustomResponse<ChamadoViewModel>> CriarChamado(CriarChamadoViewModel chamado)
     {
         var content = ConverterParaJson(chamado);
-        var response = await _httpClient.PostAsync($"api/v1/chamados", content);
+        var response = await _httpClient.PostAsync("api/v1/chamados", content);
 
         if (response.IsSuccessStatusCode)
         {
             var result = ConverterParaObj<CustomResponse<ChamadoViewModel>>(await response.Content.ReadAsStringAsync());
 
-            if (result is { Sucesso: true })
+            if (result != null)
             {
                 return result;
             }
@@ -74,8 +74,8 @@ public class ChamadoClient : BaseClient
         if (response.IsSuccessStatusCode)
         {
             var result = ConverterParaObj<CustomResponse<ChamadoViewModel>>(await response.Content.ReadAsStringAsync());
-
-            if (result is { Sucesso: true })
+            
+            if (result != null)
             {
                 return result;
             }
@@ -92,7 +92,7 @@ public class ChamadoClient : BaseClient
         {
             var result = ConverterParaObj<CustomResponse<ChamadoViewModel>>(await response.Content.ReadAsStringAsync());
 
-            if (result is { Sucesso: true })
+            if (result != null)
             {
                 return result;
             }

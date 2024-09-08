@@ -35,21 +35,22 @@ public class DepartamentoRepositorio : IDepartamentoRepositorio
 
     public async Task UpdateAsync(Departamento departamento)
     {
-        var result = await _context.Departamentos.FindAsync(departamento.Id);
+        var entidade = await _context.Departamentos.FirstOrDefaultAsync(x=> x.Id == departamento.Id)! 
+                     ?? throw new EntidadeNaoEncontradaException($"Entidade com o ID {departamento.Id} não foi encontrada.");
 
-        if (result == null)
-            throw new EntidadeNaoEncontradaException($"Entidade com o ID {departamento.Id} não foi encontrada.");
+        // Atualiza a descrição do departamento
+        entidade.Atualizar(departamento.Descricao);
 
-        _context.Departamentos.Update(departamento);
+        _context.Departamentos.Update(entidade);
     }
 
     public async Task DeleteAsync(Guid id)
     {
-        var result = await _context.Departamentos.FindAsync(id);
+        var entidade = await _context.Departamentos.FindAsync(id);
 
-        if (result == null)
+        if (entidade == null)
             throw new EntidadeNaoEncontradaException($"Entidade com o ID {id} não foi encontrada.");
 
-        _context.Departamentos.Remove(result);
+        _context.Departamentos.Remove(entidade);
     }
 }

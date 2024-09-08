@@ -4,12 +4,12 @@
     {
         public DataTableAjaxViewModel()
         {
-            start = 0;
-            length = 10;
+            Start = 0;
+            Length = 10;
         }
 
-        public int start { get; set; }
-        public int length { get; set; }
-        public object data { get; set; }
+        public int Start { get; set; }
+        public int Length { get; set; }
+        public object Data { get; set; }
     }
 }

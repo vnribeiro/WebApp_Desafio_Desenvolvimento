@@ -75,7 +75,7 @@ public class DepartamentoClient : BaseClient
         {
             var result = ConverterParaObj<CustomResponse<DepartamentoViewModel>>(await response.Content.ReadAsStringAsync());
 
-            if (result is { Sucesso: true })
+            if (result != null)
             {
                 return result;
             }
@@ -92,7 +92,7 @@ public class DepartamentoClient : BaseClient
         {
             var result = ConverterParaObj<CustomResponse<DepartamentoViewModel>>(await response.Content.ReadAsStringAsync());
 
-            if (result is { Sucesso: true })
+            if (result != null)
             {
                 return result;
             }

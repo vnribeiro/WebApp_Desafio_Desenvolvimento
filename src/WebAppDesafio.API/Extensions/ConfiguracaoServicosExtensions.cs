@@ -1,5 +1,7 @@
 ﻿using WebAppDesafio.API.Infra.Repositorios;
 using WebAppDesafio.API.Infra.Repositorios.Interfaces;
+using WebAppDesafio.API.Servicos;
+using WebAppDesafio.API.Servicos.Interfaces;
 using IUnitOfWork = WebAppDesafio.API.Infra.Dados.IUnitOfWork;
 using UnitOfWork = WebAppDesafio.API.Infra.Dados.UnitOfWork;
 
@@ -17,7 +19,7 @@ public static class ConfiguracaoServicosExtensions
         // Unidade de trabalho é registrada como um serviço com escopo.
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        // Registra o repositório como um serviço com escopo.
+        // Registra o repositório como scoped.
         services.AddScoped<IChamadoRepositorio, ChamadoRepositorio>();
         services.AddScoped<IDepartamentoRepositorio, DepartamentoRepositorio>();
         return services;
@@ -30,6 +32,9 @@ public static class ConfiguracaoServicosExtensions
     /// <returns>O IServiceCollection com os serviços adicionados.</returns>
     public static IServiceCollection AddServicos(this IServiceCollection services)
     {
+        // Registra os serviços como scoped.
+        services.AddScoped<IChamadoServico, ChamadoServico>();
+        services.AddScoped<IDepartamentoServico, DepartamentoServico>();
         return services;
     }
 }

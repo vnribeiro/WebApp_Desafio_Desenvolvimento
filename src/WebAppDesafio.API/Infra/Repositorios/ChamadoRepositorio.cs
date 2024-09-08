@@ -38,21 +38,27 @@ public class ChamadoRepositorio : IChamadoRepositorio
 
     public async Task UpdateAsync(Chamado chamado)
     {
-       var result = await _context.Chamados.FindAsync(chamado.Id);
+       var entidade =  await _context.Chamados
+           .Include(x => x.Departamento)
+           .AsNoTracking()
+           .FirstOrDefaultAsync(x => x.Id == chamado.Id) 
+                       ?? throw new EntidadeNaoEncontradaException($"Entidade com o ID {chamado.Id} não foi encontrada.");
 
-        if (result == null)
-            throw new EntidadeNaoEncontradaException($"Entidade com o ID {chamado.Id} não foi encontrada.");
+        entidade.Atualizar(chamado.Assunto, 
+            chamado.Solicitante, 
+            chamado.Departamento, 
+            chamado.DataAbertura);
 
         _context.Chamados.Update(chamado);
     }
 
     public async Task DeleteAsync(Guid id)
     {
-        var result = await _context.Chamados.FindAsync(id);
+        var entidade = await _context.Chamados.FindAsync(id);
 
-        if (result == null)
+        if (entidade == null)
             throw new EntidadeNaoEncontradaException($"Entidade com o ID {id} não foi encontrada.");
 
-        _context.Chamados.Remove(result);
+        _context.Chamados.Remove(entidade);
     }
 }

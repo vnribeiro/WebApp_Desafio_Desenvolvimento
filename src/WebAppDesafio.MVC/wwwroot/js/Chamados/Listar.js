@@ -9,13 +9,15 @@
         serverSide: true,
         ajax: config.contextPath + 'Chamados/Datatable',
         columns: [
-            { data: 'ID' },
-            { data: 'Assunto' },
-            { data: 'Solicitante' },
-            { data: 'Departamento' },
-            { data: 'DataAberturaWrapper', title: 'Data Abertura' },
+            { data: 'id', title: 'ID' },
+            { data: 'assunto', title: 'Assunto' },
+            { data: 'solicitante', title: 'Solicitante' },
+            { data: 'departamento.descricao', title: 'Departamento' },
+            { data: 'dataAberturaWrapper', title: 'Data Abertura' },
         ],
     });
+
+    console.log("teste");
 
     $('#dataTables-Chamados tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
@@ -82,7 +84,6 @@
                 } else {
                     console.log("Cancelou a exclusão.");
                 }
-
             });
         }
     });

@@ -44,8 +44,8 @@ namespace WebAppDesafio.MVC.Controllers
 
                 var dataTableVm = new DataTableAjaxViewModel()
                 {
-                    length = chamados.Dados.Count(),
-                    data = chamados
+                    Length = chamados.Dados.Count(),
+                    Data = chamados.Dados
                 };
 
                 return Ok(dataTableVm);
@@ -68,7 +68,15 @@ namespace WebAppDesafio.MVC.Controllers
 
             try
             {
-                ViewData["ListaDepartamentos"] = await _departamentoClient.GetDepartamentos();
+                var response = await _departamentoClient.GetDepartamentos();
+
+                if (!response.Sucesso)
+                {
+                    ViewData["Error"] = "Erro ao obter os departamentos";
+                }
+
+                ViewData["ListaDepartamentos"] = response.Dados;
+
             }
             catch (Exception ex)
             {
@@ -87,12 +95,7 @@ namespace WebAppDesafio.MVC.Controllers
                 {
                     Solicitante = chamadoVm.Solicitante,
                     Assunto = chamadoVm.Assunto,
-
-                    Departamento = new CriarDepartamentoViewModel
-                    {
-                        Descricao = chamadoVm.Departamento.Descricao
-                    },
-
+                    IdDepartamento = chamadoVm.Departamento.Id,
                     DataAbertura = chamadoVm.DataAbertura,
                 };
 

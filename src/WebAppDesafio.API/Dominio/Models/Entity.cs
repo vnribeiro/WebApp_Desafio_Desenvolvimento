@@ -14,6 +14,16 @@ public abstract class Entity
     }
 
     /// <summary>
+    /// Inicializa uma nova instância da classe <see cref="Entity"/> com o identificador exclusivo fornecido.
+    /// </summary>
+    /// <param name="id">O identificador único (Guid) para a entidade. Este valor será utilizado diretamente
+    /// sem gerar um novo Guid, permitindo que o identificador seja controlado externamente.</param>
+    protected Entity(Guid id)
+    {
+        _id = id;
+    }
+
+    /// <summary>
     /// Obtém ou define o identificador exclusivo para a entidade.
     /// </summary>
     public Guid Id
