@@ -6,15 +6,28 @@ using WebAppDesafio.API.Infra.Repositorios.Interfaces;
 
 namespace WebAppDesafio.API.Infra.Repositorios;
 
+/// <summary>
+/// Repositório para gerenciar operações relacionadas a chamados.
+/// </summary>
 public class ChamadoRepositorio : IChamadoRepositorio
 {
     private readonly AppDbContext _context;
 
+    /// <summary>
+    /// Inicializa uma nova instância da classe <see cref="ChamadoRepositorio"/> com o contexto de banco de dados especificado.
+    /// </summary>
+    /// <param name="context">O contexto de banco de dados.</param>
     public ChamadoRepositorio(AppDbContext context)
     {
         _context = context;
     }
 
+    /// <summary>
+    /// Obtém um chamado pelo ID especificado.
+    /// </summary>
+    /// <param name="id">O ID do chamado.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona. O resultado contém o chamado.</returns>
+    /// <exception cref="EntidadeNaoEncontradaException">Lançada se o chamado não for encontrado.</exception>
     public async Task<Chamado> GetByIdAsync(Guid id)
     {
         return await _context.Chamados
@@ -23,6 +36,10 @@ public class ChamadoRepositorio : IChamadoRepositorio
                throw new EntidadeNaoEncontradaException($"Entidade com o ID {id} não foi encontrada.");
     }
 
+    /// <summary>
+    /// Obtém todos os chamados.
+    /// </summary>
+    /// <returns>Uma tarefa que representa a operação assíncrona. O resultado contém a lista de chamados.</returns>
     public async Task<IEnumerable<Chamado>> GetAllAsync()
     {
         return await _context.Chamados
@@ -31,11 +48,22 @@ public class ChamadoRepositorio : IChamadoRepositorio
             .ToListAsync();
     }
 
+    /// <summary>
+    /// Adiciona um novo chamado.
+    /// </summary>
+    /// <param name="chamado">O chamado a ser adicionado.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona.</returns>
     public async Task AddAsync(Chamado chamado)
     {
         await _context.Chamados.AddAsync(chamado);
     }
 
+    /// <summary>
+    /// Atualiza um chamado existente.
+    /// </summary>
+    /// <param name="chamado">O chamado a ser atualizado.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona.</returns>
+    /// <exception cref="EntidadeNaoEncontradaException">Lançada se o chamado não for encontrado.</exception>
     public async Task UpdateAsync(Chamado chamado)
     {
        var entidade =  await _context.Chamados
@@ -52,6 +80,12 @@ public class ChamadoRepositorio : IChamadoRepositorio
         _context.Chamados.Update(chamado);
     }
 
+    /// <summary>
+    /// Remove um chamado pelo ID especificado.
+    /// </summary>
+    /// <param name="id">O ID do chamado a ser removido.</param>
+    /// <returns>Uma tarefa que representa a operação assíncrona.</returns>
+    /// <exception cref="EntidadeNaoEncontradaException">Lançada se o chamado não for encontrado.</exception>
     public async Task DeleteAsync(Guid id)
     {
         var entidade = await _context.Chamados.FindAsync(id);
