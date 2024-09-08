@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace WebAppDesafio.MVC.ViewModels
@@ -8,10 +9,12 @@ namespace WebAppDesafio.MVC.ViewModels
     {
         [Display(Name = "ID")]
         [DataMember(Name = "ID")]
+        [JsonProperty("id")]
         public Guid Id { get; set; }
 
         [Display(Name = "Descricao")]
         [DataMember(Name = "Descricao")]
+        [JsonProperty("descricao")]
         public string Descricao { get; set; } = null!;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AspNetCore.Reporting;
 using Microsoft.AspNetCore.Mvc;
+using Shared.ViewModels.Atualizar;
 using Shared.ViewModels.Criar;
 using WebAppDesafio.MVC.Infra.Clients;
 using WebAppDesafio.MVC.ViewModels;
@@ -102,13 +103,17 @@ namespace WebAppDesafio.MVC.Controllers
                 var response = await _chamadoClient.CriarChamado(chamado);
 
                 if (response.Sucesso)
-                    return Ok(new ResponseViewModel(
-                                $"Chamado gravado com sucesso!",
-                                AlertTypes.success,
-                                this.RouteData.Values["controller"].ToString(),
-                                nameof(this.Listar)));
-                else
-                    throw new ApplicationException($"Falha ao excluir o Chamado.");
+                {
+                    return Ok(new ResponseViewModel
+                    {
+                        Type = AlertTypes.success,
+                        Message = "Chamado gravado com sucesso!",
+                        Controller = RouteData.Values["controller"].ToString(),
+                        Action = nameof(this.Listar)
+                    });
+                }
+
+                throw new ApplicationException($"Falha ao cadastrar o Chamado.");
             }
             catch (Exception ex)
             {
@@ -117,17 +122,64 @@ namespace WebAppDesafio.MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Editar([FromRoute] Guid id)
+        public async Task<IActionResult> Editar([FromQuery] Guid id, 
+            [FromQuery] string assunto, 
+            [FromQuery] string solicitante, 
+            [FromQuery] Guid departamentoId, 
+            [FromQuery] DateTime dataAbertura)
         {
-            ViewData["Title"] = "Cadastrar Novo Chamado";
+            ViewData["Title"] = "Atualizar Chamado";
 
             try
             {
-                var response = await _chamadoClient.GetChamado(id);
+                var chamadoViewModel = new ChamadoViewModel
+                {
+                    Id = id,
+                    Assunto = assunto,
+                    Solicitante = solicitante,
+                    Departamento = new DepartamentoViewModel
+                    {
+                        Id = departamentoId
+                    },
+                    DataAbertura = dataAbertura
+                };
 
-                ViewData["ListaDepartamentos"] = _departamentoClient.GetDepartamentos();
+                var response = await _departamentoClient.GetDepartamentos();
 
-                return View("Cadastrar", response.Dados);
+                if (!response.Sucesso)
+                {
+                    ViewData["Error"] = "Erro ao obter os departamentos";
+                }
+
+                ViewData["ListaDepartamentos"] = response.Dados;
+
+                return View("Editar", chamadoViewModel);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseViewModel(ex));
+            }
+        }
+
+        [HttpPatch]
+        public async Task<IActionResult> Atualizar([FromRoute] Guid id, [FromBody] AtualizarChamadoViewModel chamadoVm)
+        {
+            try
+            {
+                var response = await _chamadoClient.AtualizarChamado(id, chamadoVm);
+
+                if (response.Sucesso)
+                {
+                    return Ok(new ResponseViewModel
+                    {
+                        Type = AlertTypes.success,
+                        Message = "Chamado atualizado com sucesso!",
+                        Controller = RouteData.Values["controller"].ToString(),
+                        Action = nameof(this.Listar)
+                    });
+                }
+
+                throw new ApplicationException($"Falha ao Atualizar o Chamado.");
             }
             catch (Exception ex)
             {
@@ -143,13 +195,17 @@ namespace WebAppDesafio.MVC.Controllers
                 var response = await _chamadoClient.ExcluirChamado(id);
 
                 if (response.Sucesso)
-                    return Ok(new ResponseViewModel(
-                                $"Chamado {id} excluído com sucesso!",
-                                AlertTypes.success,
-                                "Chamados",
-                                nameof(Listar)));
-                else
-                    throw new ApplicationException($"Falha ao excluir o Chamado {id}.");
+                {
+                    return Ok(new ResponseViewModel
+                    {
+                        Type = AlertTypes.success,
+                        Message = "Chamado excluido com sucesso!",
+                        Controller = RouteData.Values["controller"].ToString(),
+                        Action = nameof(this.Listar)
+                    });
+                }
+
+                throw new ApplicationException($"Falha ao excluir o Chamado.");
             }
             catch (Exception ex)
             {
@@ -180,6 +236,5 @@ namespace WebAppDesafio.MVC.Controllers
             //return File(reportResult.MainStream, "application/pdf");
             return File(reportResult.MainStream, "application/octet-stream", "rptChamados.pdf");
         }
-
     }
 }

@@ -115,8 +115,13 @@ public class ChamadoServico : IChamadoServico
     /// </summary>
     /// <param name="data">A data a ser verificada.</param>
     /// <returns><c>true</c> se a data for retroativa; caso contrário, <c>false</c>.</returns>
-    private bool IsDataRetroativa(DateTime data)
+    private static bool IsDataRetroativa(DateTime data)
     {
-        return data < DateTime.Today;
+        // Coloca a data atual no formato dd/MM/yyyy
+        var dataStr = DateTime.Today.ToString("dd/MM/yyyy");
+        var dataAtual = DateTime.Parse(dataStr);
+
+        // Compara a data fornecida com a data atual
+        return data.Date < dataAtual.Date;
     }
 }

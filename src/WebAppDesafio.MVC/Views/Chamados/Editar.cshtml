@@ -11,10 +11,8 @@
 <div class="row">
     <div class="col-lg-12">
 
-        <form id="form" asp-action="Cadastrar" class="wizard-big" enctype="multipart/form-data" role="form" onsubmit="return false;">
-
+        <form id="form" asp-action="Atualizar" class="wizard-big" enctype="multipart/form-data" role="form" onsubmit="return false;">
             <input type="hidden" asp-for="Id" />
-
             <div class="row">
                 <div class="form-group col-lg-7 col-md-6 col-sm-12">
                     <label class="form-label" asp-for="Assunto"></label>
@@ -36,7 +34,14 @@
                         <option value=""></option>
                         @foreach (var item in (ViewData["ListaDepartamentos"] as List<DepartamentoViewModel>)!)
                         {
-                            <option data-codbanco="@item.Id" value="@item.Id">@item.Descricao</option>
+                            if (item.Id == Model.Departamento.Id)
+                            {
+                                <option data-codbanco="@item.Id" value="@item.Id" selected="selected">@item.Descricao</option>
+                            }
+                            else
+                            {
+                                <option data-codbanco="@item.Id" value="@item.Id">@item.Descricao</option>
+                            }
                         }
                     </select>
                     <span class="text-danger" asp-validation-for="Departamento"></span>
@@ -87,6 +92,6 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 
     <script src="~/js/Chamados/Chamado.js" asp-append-version="true"></script>
-    <script src="~/js/Chamados/Cadastrar.js" asp-append-version="true"></script>
+    <script src="~/js/Chamados/Atualizar.js" asp-append-version="true"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 }

@@ -4,9 +4,9 @@
  * @param {jQueryObj} form
  */
 function FormularioInvalidoAlert(form) {
-    let mensagensDeErro = $("span.text-danger.field-validation-error");
+    let mensagensDeErro = $("span.text-danger:visible");
     if (form) {
-        mensagensDeErro = form.find("span.text-danger.field-validation-error");
+        mensagensDeErro = form.find("span.text-danger:visible");
     }
     let msg = "";
     let errElem = {};

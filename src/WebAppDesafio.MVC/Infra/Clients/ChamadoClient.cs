@@ -1,6 +1,7 @@
 ﻿using Shared.ViewModels;
 using Shared.ViewModels.Atualizar;
 using Shared.ViewModels.Criar;
+using System.Net;
 using WebAppDesafio.MVC.ViewModels;
 
 namespace WebAppDesafio.MVC.Infra.Clients;
@@ -100,16 +101,15 @@ public class ChamadoClient : BaseClient
     public async Task<CustomResponse<ChamadoViewModel>> AtualizarChamado(Guid id, AtualizarChamadoViewModel chamado)
     {
         var content = ConverterParaJson(chamado);
-        var response = await _httpClient.PutAsync($"api/v1/chamados/{id}", content);
+        var response = await _httpClient.PatchAsync($"api/v1/chamados/{id}", content);
 
-        if (response.IsSuccessStatusCode)
+        if (response is { IsSuccessStatusCode: true, StatusCode: HttpStatusCode.NoContent })
         {
-            var result = ConverterParaObj<CustomResponse<ChamadoViewModel>>(await response.Content.ReadAsStringAsync());
-            
-            if (result != null)
+            return new CustomResponse<ChamadoViewModel>
             {
-                return result;
-            }
+                Sucesso = true,
+                Mensagem = "Chamado atualizado com sucesso."
+            };
         }
 
         throw new ApplicationException("Erro ao atualizar chamado.");
@@ -125,14 +125,13 @@ public class ChamadoClient : BaseClient
     {
         var response = await _httpClient.DeleteAsync($"api/v1/chamados/{id}");
 
-        if (response.IsSuccessStatusCode)
+        if (response is { IsSuccessStatusCode: true, StatusCode: HttpStatusCode.NoContent })
         {
-            var result = ConverterParaObj<CustomResponse<ChamadoViewModel>>(await response.Content.ReadAsStringAsync());
-
-            if (result != null)
+            return new CustomResponse<ChamadoViewModel>
             {
-                return result;
-            }
+                Sucesso = true,
+                Mensagem = "Chamado removido com sucesso."
+            };
         }
 
         throw new ApplicationException("Erro ao excluir chamado.");

@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     $('#btnSalvar').click(function () {
+
         // Verifica se o formulário é válido
         if (!validarFormulario()) {
             FormularioInvalidoAlert($('#form'));
@@ -7,20 +8,20 @@
         }
 
         let chamado = SerielizeForm($('#form'));
-        let url = $('#form').attr('action');
 
         $.ajax({
-            type: "POST",
-            url: url,
-            data: {
+            type: "PATCH",
+            url: config.contextPath + 'Chamados/Atualizar/' + chamado.Id,
+            contentType: "application/json",
+            data: JSON.stringify({
+                Id: chamado.Id,
                 Assunto: chamado.Assunto,
                 Solicitante: chamado.Solicitante,
-                Departamento: {
-                    Id: $('#Departamento').val()
-                },
+                IdDepartamento: $('#Departamento').val(),
                 DataAbertura: chamado.DataAbertura,
-            },
+            }),
             success: function (result) {
+                console.log(result.message);
                 Swal.fire({
                     icon: 'success',
                     type: result.type,

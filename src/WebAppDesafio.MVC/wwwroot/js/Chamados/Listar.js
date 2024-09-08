@@ -17,8 +17,6 @@
         ],
     });
 
-    console.log("teste");
-
     $('#dataTables-Chamados tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
@@ -38,48 +36,74 @@
 
     $('#btnEditar').click(function () {
         var data = table.row('.selected').data();
-        window.location.href = config.contextPath + 'Chamados/Editar/' + data.ID;
+
+        if (data != undefined) {
+            var queryString = $.param({
+                id: data.id,
+                assunto: data.assunto,
+                solicitante: data.solicitante,
+                departamentoId: data.departamento.id,
+                dataAbertura: data.dataAbertura
+            });
+
+            window.location.href = config.contextPath + 'Chamados/Editar?' + queryString;
+        }
+    });
+
+    $('#dataTables-Chamados tbody').on('dblclick', 'tr', function () {
+        var data = table.row(this).data();
+
+        if (data != undefined) {
+            var queryString = $.param({
+                id: data.id,
+                assunto: data.assunto,
+                solicitante: data.solicitante,
+                departamentoId: data.departamento.id,
+                dataAbertura: data.dataAbertura
+            });
+
+            window.location.href = config.contextPath + 'Chamados/Editar?' + queryString;
+        }
     });
 
     $('#btnExcluir').click(function () {
 
         let data = table.row('.selected').data();
-        let idRegistro = data.ID;
-        if (!idRegistro || idRegistro <= 0) {
+
+        if (data == undefined || !data.id)
+        {
             return;
         }
 
-        if (idRegistro) {
+        if (data.id) {
             Swal.fire({
-                text: "Tem certeza de que deseja excluir " + data.Assunto + " ?",
+                text: "Tem certeza de que deseja excluir " + data.assunto + " ?",
                 type: "warning",
                 showCancelButton: true,
             }).then(function (result) {
-
                 if (result.value) {
                     $.ajax({
-                        url: config.contextPath + 'Chamados/Excluir/' + idRegistro,
+                        url: config.contextPath + 'Chamados/Excluir/' + data.id,
                         type: 'DELETE',
                         contentType: 'application/json',
-                        error: function (result) {
-
-                            Swal.fire({
-                                text: result,
-                                confirmButtonText: 'OK',
-                                icon: 'error'
-                            });
-
-                        },
                         success: function (result) {
-
                             Swal.fire({
-                                type: result.Type,
-                                title: result.Title,
-                                text: result.Message,
+                                icon: 'success',
+                                type: result.type,
+                                title: result.title,
+                                text: result.message,
                             }).then(function () {
                                 table.draw();
                             });
-                        }
+                        },
+                        error: function (result) {
+                            Swal.fire({
+                                icon: 'error',
+                                confirmButtonText: 'OK',
+                                type: result.responseJSON.type,
+                                text: result.responseJSON.message,
+                            });
+                        }                    
                     });
                 } else {
                     console.log("Cancelou a exclusão.");
@@ -87,5 +111,4 @@
             });
         }
     });
-
 });
