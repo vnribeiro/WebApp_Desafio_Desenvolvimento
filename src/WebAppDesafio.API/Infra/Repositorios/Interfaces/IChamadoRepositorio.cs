@@ -1,4 +1,4 @@
-﻿using WebAppDesafio.API.Dominio.Models;
+﻿using WebAppDesafio.API.Domain.Models;
 
 namespace WebAppDesafio.API.Infra.Repositorios.Interfaces;
 

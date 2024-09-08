@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shared.ViewModels;
 using Shared.ViewModels.Atualizar;
 using Shared.ViewModels.Criar;
-using WebAppDesafio.API.Dominio.Models;
+using WebAppDesafio.API.Domain.Models;
 using WebAppDesafio.API.Infra.Exceptions;
 using WebAppDesafio.API.Infra.Repositorios.Interfaces;
 using WebAppDesafio.API.Servicos.Interfaces;

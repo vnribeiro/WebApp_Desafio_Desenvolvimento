@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebAppDesafio.API.Dominio.Models;
+using WebAppDesafio.API.Domain.Models;
 using WebAppDesafio.API.Infra.Dados;
 using WebAppDesafio.API.Infra.Exceptions;
 using WebAppDesafio.API.Infra.Repositorios.Interfaces;

@@ -1,6 +1,6 @@
-﻿using WebAppDesafio.API.Dominio.Models.Interfaces;
+﻿using WebAppDesafio.API.Domain.Models.Interfaces;
 
-namespace WebAppDesafio.API.Dominio.Models;
+namespace WebAppDesafio.API.Domain.Models;
 
 public class Departamento : Entity, IAggregateRoot
 {

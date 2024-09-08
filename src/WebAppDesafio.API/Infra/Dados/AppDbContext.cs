@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebAppDesafio.API.Dominio.Models;
+using WebAppDesafio.API.Domain.Models;
 
 namespace WebAppDesafio.API.Infra.Dados;
 

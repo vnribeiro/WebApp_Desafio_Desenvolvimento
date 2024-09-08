@@ -1,4 +1,4 @@
-﻿namespace WebAppDesafio.API.Dominio.Models;
+﻿namespace WebAppDesafio.API.Domain.Models;
 
 public abstract class Entity
 {

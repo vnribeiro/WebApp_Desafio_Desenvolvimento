@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using WebAppDesafio.API.Dominio.Models;
+using WebAppDesafio.API.Domain.Models;
 
 namespace WebAppDesafio.API.Infra.Dados.Mapeamentos;
 

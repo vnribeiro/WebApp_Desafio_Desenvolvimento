@@ -1,6 +1,6 @@
 ﻿using Shared.ViewModels.Atualizar;
 using Shared.ViewModels.Criar;
-using WebAppDesafio.API.Dominio.Models;
+using WebAppDesafio.API.Domain.Models;
 
 namespace WebAppDesafio.API.Servicos.Interfaces;
 
