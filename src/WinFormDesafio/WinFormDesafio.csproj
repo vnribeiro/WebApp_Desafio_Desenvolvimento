@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="rptChamados.rdlc" />
+    <None Remove="rptDepartamentos.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="rptChamados.rdlc" />
+    <EmbeddedResource Include="rptDepartamentos.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="dsChamados.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsChamados.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="dsDepartamentos.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsDepartamentos.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="dsChamados.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>dsChamados.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Update="dsDepartamentos.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>dsDepartamentos.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+  </ItemGroup>
+
+</Project>

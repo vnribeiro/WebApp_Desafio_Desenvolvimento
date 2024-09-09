@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Reporting.NETCore;
 using Shared.ViewModels.Atualizar;
 using Shared.ViewModels.Criar;
 using WebAppDesafio.MVC.Infra.Clients;
@@ -10,10 +12,13 @@ namespace WebAppDesafio.MVC.Controllers
     public class DepartamentosController : Controller
     {
         private readonly DepartamentoClient _departamentoClient;
+        private readonly IHostEnvironment? _hostEnvironment;
 
-        public DepartamentosController(DepartamentoClient departamentoClient)
+        public DepartamentosController(DepartamentoClient departamentoClient, 
+            IHostEnvironment? hostEnvironment)
         {
             _departamentoClient = departamentoClient;
+            _hostEnvironment = hostEnvironment;
         }
 
         /// <summary>
@@ -92,7 +97,7 @@ namespace WebAppDesafio.MVC.Controllers
                     {
                         Type = AlertTypes.success,
                         Message = "Departamento criado com sucesso!",
-                        Controller = RouteData.Values["controller"].ToString(),
+                        Controller = RouteData.Values["controller"]!.ToString()!,
                         Action = nameof(this.Listar)
                     });
                 }
@@ -151,7 +156,7 @@ namespace WebAppDesafio.MVC.Controllers
                     {
                         Type = AlertTypes.success,
                         Message = "Chamado atualizado com sucesso!",
-                        Controller = RouteData.Values["controller"].ToString(),
+                        Controller = RouteData.Values["controller"]!.ToString()!,
                         Action = nameof(this.Listar)
                     });
                 }
@@ -182,7 +187,7 @@ namespace WebAppDesafio.MVC.Controllers
                     {
                         Type = AlertTypes.success,
                         Message = "Chamado excluido com sucesso!",
-                        Controller = RouteData.Values["controller"].ToString(),
+                        Controller = RouteData.Values["controller"]?.ToString()!,
                         Action = nameof(this.Listar)
                     });
                 }
@@ -193,6 +198,33 @@ namespace WebAppDesafio.MVC.Controllers
             {
                 return BadRequest(new ResponseViewModel(ex));
             }
+        }
+
+        /// <summary>
+        /// Gera um relatório de departamentos em formato PDF.
+        /// </summary>
+        /// <returns>Arquivo PDF do relatório de departamentos.</returns>
+        [HttpGet]
+        public async Task<IActionResult> Report()
+        {
+            var contentRootPath = _hostEnvironment!.ContentRootPath;
+            var path = Path.Combine(contentRootPath, "wwwroot", "reports", "rptDepartamentos.rdlc");
+
+            var localReport = new LocalReport();
+            await using (var reportStream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                localReport.LoadReportDefinition(reportStream);
+            }
+
+            // Carrega os dados que serão apresentados no relatório
+            var response = await _departamentoClient.GetDepartamentos();
+            localReport.DataSources.Add(new ReportDataSource("dsDepartamentos", response.Dados));
+
+            // Renderiza o relatório em PDF
+            var reportResult = localReport.Render("PDF");
+
+            //return File(reportResult.MainStream, "application/pdf");
+            return File(reportResult, "application/octet-stream", "rptDepartamentos.pdf");
         }
     }
 }

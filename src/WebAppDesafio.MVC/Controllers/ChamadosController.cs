@@ -1,5 +1,5 @@
-﻿using AspNetCore.Reporting;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Reporting.NETCore;
 using Shared.ViewModels.Atualizar;
 using Shared.ViewModels.Criar;
 using WebAppDesafio.MVC.Infra.Clients;
@@ -261,25 +261,25 @@ namespace WebAppDesafio.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Report()
         {
-            var mimeType = string.Empty;
             var extension = 1;
             var contentRootPath = _hostEnvironment.ContentRootPath;
             var path = Path.Combine(contentRootPath, "wwwroot", "reports", "rptChamados.rdlc");
-            //
-            // ... parameters
-            //
-            var localReport = new LocalReport(path);
+
+            var localReport = new LocalReport();
+            await using (var reportStream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                localReport.LoadReportDefinition(reportStream);
+            }
 
             // Carrega os dados que serão apresentados no relatório
             var response = await _chamadoClient.GetChamados();
-
-            localReport.AddDataSource("dsChamados", response.Dados);
+            localReport.DataSources.Add(new ReportDataSource("dsChamados", response.Dados));
 
             // Renderiza o relatório em PDF
-            ReportResult reportResult = localReport.Execute(RenderType.Pdf);
+            var reportResult = localReport.Render("PDF");
 
             //return File(reportResult.MainStream, "application/pdf");
-            return File(reportResult.MainStream, "application/octet-stream", "rptChamados.pdf");
+            return File(reportResult, "application/octet-stream", "rptChamados.pdf");
         }
     }
 }

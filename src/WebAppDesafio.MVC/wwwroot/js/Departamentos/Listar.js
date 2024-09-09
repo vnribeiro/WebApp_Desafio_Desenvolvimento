@@ -23,6 +23,10 @@
         }
     });
 
+    $('#btnRelatorio').click(function () {
+        window.location.href = config.contextPath + 'Departamentos/Report';
+    });
+
     $('#btnAdicionar').click(function () {
         window.location.href = config.contextPath + 'Departamentos/Cadastrar';
     });
