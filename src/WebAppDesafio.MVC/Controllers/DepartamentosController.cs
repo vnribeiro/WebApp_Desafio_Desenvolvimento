@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Reporting.NETCore;
-using Shared.ViewModels.Atualizar;
 using Shared.ViewModels.Criar;
 using WebAppDesafio.MVC.Infra.Clients;
 using WebAppDesafio.MVC.ViewModels;

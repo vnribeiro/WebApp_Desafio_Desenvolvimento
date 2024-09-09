@@ -37,6 +37,20 @@ public class ChamadoRepositorio : IChamadoRepositorio
     }
 
     /// <summary>
+    /// Busca solicitantes com base em um nome parcial.
+    /// </summary>
+    /// <param name="nome">Nome parcial do solicitante para a pesquisa.</param>
+    /// <returns>Uma lista de nomes de solicitantes que correspondem ao nome parcial fornecido.</returns>
+    public async Task<IEnumerable<string>> GetSolicitanteAsync(string nome)
+    {
+        return await _context.Chamados
+            .Where(x => x.Solicitante.Contains(nome))
+            .Select(x => x.Solicitante)
+            .Distinct()
+            .ToListAsync(); 
+    }
+
+    /// <summary>
     /// Obtém todos os chamados.
     /// </summary>
     /// <returns>Uma tarefa que representa a operação assíncrona. O resultado contém a lista de chamados.</returns>

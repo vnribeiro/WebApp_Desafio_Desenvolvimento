@@ -63,6 +63,34 @@ public class ChamadosController : MainController
     }
 
     /// <summary>
+    /// Busca solicitantes com base em um nome parcial fornecido.
+    /// </summary>
+    /// <param name="solicitante">Nome parcial do solicitante para a pesquisa.</param>
+    /// <returns>Retorna uma lista de nomes de solicitantes que correspondem ao nome parcial fornecido.</returns>
+    [HttpGet("{solicitante}")]
+    [ProducesResponseType(typeof(CustomResponse<Chamado>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<CustomResponse<Chamado>>> GetSolicitante([FromRoute, Required] string solicitante)
+    {
+        if (string.IsNullOrEmpty(solicitante))
+        {
+            return NotFound(new CustomResponse
+            {
+                Sucesso = false,
+                Mensagem = "Erro ao obter nomes dos solicitantes"
+            });
+        }
+
+        var solicitantes = await _chamadoRepositorio.GetSolicitanteAsync(solicitante);
+
+        return Ok(new CustomResponse<IEnumerable<string>>
+        {
+            Sucesso = true,
+            Dados = solicitantes,
+            Mensagem = "Solicitantes recuperado com sucesso."
+        });
+    }
+
+    /// <summary>
     /// Obtém todos os chamados.
     /// </summary>
     /// <returns>Retorna uma lista de todos os chamados.</returns>

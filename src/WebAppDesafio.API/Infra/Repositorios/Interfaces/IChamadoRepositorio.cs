@@ -5,6 +5,7 @@ namespace WebAppDesafio.API.Infra.Repositorios.Interfaces;
 public interface IChamadoRepositorio : IRepositorio<Chamado>
 {
     Task<Chamado> GetByIdAsync(Guid id);
+    Task<IEnumerable<string>> GetSolicitanteAsync(string nome);
     Task<IEnumerable<Chamado>> GetAllAsync();
     Task AddAsync(Chamado chamado);
     Task UpdateAsync(Chamado chamado);

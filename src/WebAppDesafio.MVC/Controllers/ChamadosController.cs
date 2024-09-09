@@ -45,6 +45,17 @@ namespace WebAppDesafio.MVC.Controllers
         }
 
         /// <summary>
+        /// Obtém os solicitantes do chamado.
+        /// </summary>
+        /// <returns>Dados dos chamados em formato JSON.</returns>
+        [HttpGet]
+        public async Task<IActionResult> Solicitantes(string solicitante)
+        {
+            var response = await _chamadoClient.GetSolicitantes(solicitante);
+            return Ok(response.Dados);
+        }
+
+        /// <summary>
         /// Obtém os dados dos chamados para o DataTable.
         /// </summary>
         /// <returns>Dados dos chamados em formato JSON.</returns>

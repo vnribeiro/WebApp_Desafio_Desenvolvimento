@@ -40,4 +40,23 @@
             },
         });
     });
+
+    $("#Solicitante").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: config.contextPath + "Chamados/Solicitantes",
+                type: "GET",
+                data: {
+                    Solicitante: request.term
+                },
+                success: function (data) {
+                    response(data);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching autocomplete data:", error);
+                }
+            });
+        },
+        minLength: 2
+    });
 });

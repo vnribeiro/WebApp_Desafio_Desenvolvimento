@@ -46,6 +46,29 @@ public class ChamadoClient : BaseClient
     }
 
     /// <summary>
+    /// Busca solicitantes com base em um nome parcial fornecido.
+    /// </summary>
+    /// <param name="solicitante">Nome parcial do solicitante para a pesquisa.</param>
+    /// <returns>Retorna uma resposta personalizada contendo uma lista de nomes de solicitantes que correspondem ao nome parcial fornecido.</returns>
+    /// <exception cref="ApplicationException">Lançada quando ocorre um erro ao obter os solicitantes.</exception>
+    public async Task<CustomResponse<IEnumerable<string>>> GetSolicitantes(string solicitante)
+    {
+        var response = await _httpClient.GetAsync($"api/v1/chamados/{solicitante}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var result = ConverterParaObj<CustomResponse<IEnumerable<string>>>(await response.Content.ReadAsStringAsync());
+
+            if (result != null)
+            {
+                return result;
+            }
+        }
+
+        throw new ApplicationException("Erro ao obter solicitantes.");
+    }
+
+    /// <summary>
     /// Obtém todos os chamados.
     /// </summary>
     /// <returns>Uma tarefa que representa a operação assíncrona. O resultado contém a resposta personalizada com a lista de chamados.</returns>
