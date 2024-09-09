@@ -272,7 +272,17 @@ namespace WebAppDesafio.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Report()
         {
-            var extension = 1;
+            var response = await _chamadoClient.GetChamados();
+
+            var chamados = response.Dados.Select(x => new
+            {
+                Id = x.Id,
+                Assunto = x.Assunto,
+                Solicitante = x.Solicitante,
+                Departamento = x.Departamento.Descricao,
+                DataAbertura = x.DataAbertura
+            }).ToList();
+
             var contentRootPath = _hostEnvironment.ContentRootPath;
             var path = Path.Combine(contentRootPath, "wwwroot", "reports", "rptChamados.rdlc");
 
@@ -283,7 +293,6 @@ namespace WebAppDesafio.MVC.Controllers
             }
 
             // Carrega os dados que serão apresentados no relatório
-            var response = await _chamadoClient.GetChamados();
             localReport.DataSources.Add(new ReportDataSource("dsChamados", response.Dados));
 
             // Renderiza o relatório em PDF
