@@ -5,14 +5,14 @@
 
 ## Descrição
 
-Este projeto foi migrado da versão .NET Core 2.1 para .NET 6.0 e agora inclui a implementação do Entity Framework Core (EF Core). O EF Core facilita o gerenciamento de dados em bancos de dados relacionais. O banco de dados utilizado é o SQLite.
+Este projeto foi migrado da versão .NET Core 2.1 para .NET 6.0 e agora inclui a implementação do Entity Framework Core (EF Core) junto com o padrão Repository. O EF Core facilita o gerenciamento de dados em bancos de dados relacionais, e o padrão Repository abstrai as operações de dados, fornecendo uma camada de acesso consistente. O banco de dados utilizado é o SQLite.
 
 Além disso, foi adicionado um módulo de Departamento, que permite criar, atualizar, obter e deletar departamentos de maneira simplificada.
 
 ## Atualizações
 
 - **Migração do Framework**: O projeto foi atualizado da versão .NET Core 2.1 para .NET 6.0.
-- **Entity Framework Core**: Implementação do EF Core para gerenciamento de dados.
+- **Entity Framework Core**: Implementação do EF Core para gerenciamento de dados, junto com o padrão Repository.
 - **Banco de Dados**: Utilização do SQLite como banco de dados.
 - **Módulo de Departamento**: Adição de funcionalidades para criar, atualizar, obter e deletar departamentos.
 - **Refatoração de Código**: Atualizações e melhorias no código para compatibilidade com .NET 6.0 e melhores práticas.
