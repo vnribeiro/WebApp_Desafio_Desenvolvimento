@@ -4,10 +4,10 @@ namespace WebAppDesafio.MVC.ViewModels
 {
     public class ResponseViewModel : ErrorViewModel
     {
-        public string Action { get; set; }
-        public string Controller { get; set; }
+        public string Action { get; set; } = null!;
+        public string Controller { get; set; } = null!;
         public AlertTypes Type { get; set; }
-        public string Message { get; set; }
+        public string Message { get; set; } = null!;
 
         public ResponseViewModel() { }
 

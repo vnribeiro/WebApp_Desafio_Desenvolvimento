@@ -140,7 +140,7 @@ namespace WebAppDesafio.MVC.Controllers
                     {
                         Type = AlertTypes.success,
                         Message = "Chamado gravado com sucesso!",
-                        Controller = RouteData.Values["controller"].ToString(),
+                        Controller = RouteData.Values["controller"]!.ToString()!,
                         Action = nameof(this.Listar)
                     });
                 }
@@ -221,7 +221,7 @@ namespace WebAppDesafio.MVC.Controllers
                     {
                         Type = AlertTypes.success,
                         Message = "Chamado atualizado com sucesso!",
-                        Controller = RouteData.Values["controller"].ToString(),
+                        Controller = RouteData.Values["controller"]!.ToString()!,
                         Action = nameof(this.Listar)
                     });
                 }
@@ -252,7 +252,7 @@ namespace WebAppDesafio.MVC.Controllers
                     {
                         Type = AlertTypes.success,
                         Message = "Chamado excluido com sucesso!",
-                        Controller = RouteData.Values["controller"].ToString(),
+                        Controller = RouteData.Values["controller"]!.ToString()!,
                         Action = nameof(this.Listar)
                     });
                 }
@@ -283,7 +283,7 @@ namespace WebAppDesafio.MVC.Controllers
                 DataAbertura = x.DataAbertura
             }).ToList();
 
-            var contentRootPath = _hostEnvironment.ContentRootPath;
+            var contentRootPath = _hostEnvironment!.ContentRootPath;
             var path = Path.Combine(contentRootPath, "wwwroot", "reports", "rptChamados.rdlc");
 
             var localReport = new LocalReport();
