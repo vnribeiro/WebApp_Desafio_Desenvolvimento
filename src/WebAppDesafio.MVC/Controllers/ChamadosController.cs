@@ -293,7 +293,7 @@ namespace WebAppDesafio.MVC.Controllers
             }
 
             // Carrega os dados que serão apresentados no relatório
-            localReport.DataSources.Add(new ReportDataSource("dsChamados", response.Dados));
+            localReport.DataSources.Add(new ReportDataSource("dsChamados", chamados));
 
             // Renderiza o relatório em PDF
             var reportResult = localReport.Render("PDF");
