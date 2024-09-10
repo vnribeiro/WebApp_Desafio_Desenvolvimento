@@ -7,12 +7,14 @@
             return;
         }
 
-        let chamado = SerielizeForm($('#form'));
+        chamado = SerielizeForm($('#form'));
 
         $.ajax({
             method: "PATCH",
-            url: config.contextPath + 'Chamados/Atualizar/' + chamado.Id,
-            contentType: "application/json",
+            url: `${config.contextPath}Chamados/Atualizar/${chamado.Id}`,
+            headers: {
+                "Content-Type": "application/json"
+            },
             data: JSON.stringify({
                 Id: chamado.Id,
                 Assunto: chamado.Assunto,

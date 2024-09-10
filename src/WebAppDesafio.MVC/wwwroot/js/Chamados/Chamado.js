@@ -35,8 +35,26 @@ function validarFormulario() {
         isValid = false;
     }
 
+    return isValid;
+}
+
+// Validação da data retroativa
+function isRetroactive(dateString) {
+    var today = moment().startOf('day');
+    var selectedDate = moment(dateString, 'DD/MM/YYYY').startOf('day');
+    return selectedDate.isBefore(today);
+}
+
+// Validação da dataAbertura
+function validarDataAbertura(dateString) {
+    let isValid = true;
+
+    // Limpar mensagens de erro anteriores
+    $('.text-danger').text('');
+
     // Validação do campo Data de Abertura
     var dataAbertura = $('#DataAbertura').val().trim();
+
     if (!dataAbertura) {
         $('#DataAbertura').closest('.form-group').find('.text-danger').text('O campo Data de Abertura é obrigatório.');
         isValid = false;
@@ -46,11 +64,4 @@ function validarFormulario() {
     }
 
     return isValid;
-}
-
-// Validação da data retroativa
-function isRetroactive(dateString) {
-    var today = moment().startOf('day');
-    var selectedDate = moment(dateString, 'DD/MM/YYYY').startOf('day');
-    return selectedDate.isBefore(today);
 }

@@ -2,6 +2,7 @@
 using Microsoft.Reporting.NETCore;
 using Shared.ViewModels.Atualizar;
 using Shared.ViewModels.Criar;
+using System.ServiceModel.Channels;
 using WebAppDesafio.MVC.Infra.Clients;
 using WebAppDesafio.MVC.ViewModels;
 using WebAppDesafio.MVC.ViewModels.Enums;
@@ -229,7 +230,7 @@ namespace WebAppDesafio.MVC.Controllers
                 return BadRequest(new ResponseViewModel
                 {
                     Type = AlertTypes.error,
-                    Message = response.Mensagem!,
+                    Message = response.Mensagem ?? "Falha ao atualizar o Chamado.",
                 });
             }
             catch (Exception ex)
@@ -264,7 +265,7 @@ namespace WebAppDesafio.MVC.Controllers
                 return BadRequest(new ResponseViewModel
                 {
                     Type = AlertTypes.error,
-                    Message = response.Mensagem!,
+                    Message = response.Mensagem ?? "Falha ao atualizar o Chamado."
                 });
             }
             catch (Exception ex)

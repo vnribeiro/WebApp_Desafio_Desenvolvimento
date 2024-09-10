@@ -1,7 +1,7 @@
 ﻿$(function () {
     $('#btnSalvar').on('click', function () {
         // Verifica se o formulário é válido
-        if (!validarFormulario()) {
+        if (!validarFormulario() || !validarDataAbertura()) {
             FormularioInvalidoAlert($('#form'));
             return;
         }
