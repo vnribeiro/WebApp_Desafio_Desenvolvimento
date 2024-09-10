@@ -112,7 +112,13 @@ public class DepartamentoClient : BaseClient
             };
         }
 
-        throw new ApplicationException("Erro ao atualizar departamento.");
+        var result = ConverterParaObj<CustomResponse<ChamadoViewModel>>(await response.Content.ReadAsStringAsync());
+
+        return new CustomResponse<DepartamentoViewModel>
+        {
+            Sucesso = false,
+            Mensagem = result?.Mensagem
+        };
     }
 
     /// <summary>
@@ -134,7 +140,13 @@ public class DepartamentoClient : BaseClient
             };
         }
 
-        throw new ApplicationException("Erro ao excluir departamento.");
+        var result = ConverterParaObj<CustomResponse<ChamadoViewModel>>(await response.Content.ReadAsStringAsync());
+
+        return new CustomResponse<DepartamentoViewModel>
+        {
+            Sucesso = false,
+            Mensagem = result?.Mensagem
+        };
     }
 }
 

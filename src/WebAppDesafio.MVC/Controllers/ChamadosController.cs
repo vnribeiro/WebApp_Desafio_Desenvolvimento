@@ -226,7 +226,11 @@ namespace WebAppDesafio.MVC.Controllers
                     });
                 }
 
-                throw new ApplicationException($"Falha ao Atualizar o Chamado.");
+                return BadRequest(new ResponseViewModel
+                {
+                    Type = AlertTypes.error,
+                    Message = response.Mensagem!,
+                });
             }
             catch (Exception ex)
             {
@@ -257,7 +261,11 @@ namespace WebAppDesafio.MVC.Controllers
                     });
                 }
 
-                throw new ApplicationException($"Falha ao excluir o Chamado.");
+                return BadRequest(new ResponseViewModel
+                {
+                    Type = AlertTypes.error,
+                    Message = response.Mensagem!,
+                });
             }
             catch (Exception ex)
             {

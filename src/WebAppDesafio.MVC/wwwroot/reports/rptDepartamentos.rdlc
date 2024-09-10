@@ -6,10 +6,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>7.29438cm</Width>
+              <Width>5.91855cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>15.39101cm</Width>
+              <Width>9.96704cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -52,7 +52,7 @@
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="Textbox7">
-                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -115,7 +115,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -168,10 +167,11 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <KeepTogether>true</KeepTogether>
         <DataSetName>dsDepartamentos</DataSetName>
         <Top>0.28787cm</Top>
         <Height>1.2cm</Height>
-        <Width>22.68539cm</Width>
+        <Width>15.88559cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -182,7 +182,7 @@
     <Height>2in</Height>
     <Style />
   </Body>
-  <Width>9.12917in</Width>
+  <Width>6.25417in</Width>
   <Page>
     <PageHeader>
       <Height>3.94229cm</Height>
@@ -210,7 +210,7 @@ Comercial: 0800 123 1184</Value>
           <Top>0.77639cm</Top>
           <Left>5.59222cm</Left>
           <Height>1.94938cm</Height>
-          <Width>17.09316cm</Width>
+          <Width>10.29337cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -240,7 +240,7 @@ Comercial: 0800 123 1184</Value>
           <rd:DefaultName>Textbox3</rd:DefaultName>
           <Left>5.55694cm</Left>
           <Height>0.6cm</Height>
-          <Width>17.12844cm</Width>
+          <Width>10.32865cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -287,7 +287,7 @@ Comercial: 0800 123 1184</Value>
           <rd:DefaultName>Textbox4</rd:DefaultName>
           <Top>2.90215cm</Top>
           <Height>0.6cm</Height>
-          <Width>22.68538cm</Width>
+          <Width>15.88559cm</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
@@ -322,7 +322,7 @@ Comercial: 0800 123 1184</Value>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>75e3aeff-7f82-4cc4-af8e-84239e62a280</rd:DataSourceID>
+      <rd:DataSourceID>158b58d4-a645-4cb1-86a6-edeb2914fcd7</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -334,7 +334,7 @@ Comercial: 0800 123 1184</Value>
       <Fields>
         <Field Name="ID">
           <DataField>ID</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
+          <rd:TypeName>System.Guid</rd:TypeName>
         </Field>
         <Field Name="Descricao">
           <DataField>Descricao</DataField>
@@ -343,8 +343,11 @@ Comercial: 0800 123 1184</Value>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsDepartamentos</rd:DataSetName>
-        <rd:SchemaPath>C:\Dev\Projects\WebApp_Desafio_Desenvolvimento\WinForm_Desafio_Reports\dsDepartamentos.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Dev\Projects\WebApp_Desafio_Desenvolvimento\src\WebAppDesafio.MVC\wwwroot\reports\dsDepartamentos.xsd</rd:SchemaPath>
         <rd:TableName>Table</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

@@ -210,7 +210,7 @@ namespace WebAppDesafio.MVC.Controllers
             var departamentos = response.Dados.Select(x => new
             {
                 ID = x.Id,
-                Descricao = x.Descricao.Trim()
+                Descricao = x.Descricao
             });
 
             var contentRootPath = _hostEnvironment!.ContentRootPath;

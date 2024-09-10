@@ -135,7 +135,13 @@ public class ChamadoClient : BaseClient
             };
         }
 
-        throw new ApplicationException("Erro ao atualizar chamado.");
+        var result = ConverterParaObj<CustomResponse<ChamadoViewModel>>(await response.Content.ReadAsStringAsync());
+
+        return new CustomResponse<ChamadoViewModel>
+        {
+            Sucesso = false,
+            Mensagem = result?.Mensagem
+        };
     }
 
     /// <summary>
@@ -157,7 +163,13 @@ public class ChamadoClient : BaseClient
             };
         }
 
-        throw new ApplicationException("Erro ao excluir chamado.");
+        var result = ConverterParaObj<CustomResponse<ChamadoViewModel>>(await response.Content.ReadAsStringAsync());
+
+        return new CustomResponse<ChamadoViewModel>
+        {
+            Sucesso = false,
+            Mensagem = result?.Mensagem
+        };
     }
 }
 

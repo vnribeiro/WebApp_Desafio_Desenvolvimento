@@ -33,7 +33,7 @@ public class ChamadoServico : IChamadoServico
     {
         if (IsDataRetroativa(chamadoViewModel.DataAbertura))
         {
-            throw new ArgumentException("Data de abertura retroativa não permitida ", nameof(chamadoViewModel.DataAbertura));
+            throw new ArgumentException("Data de abertura retroativa não permitida ");
         }
 
         //Verifica se o departamento existe
@@ -68,11 +68,6 @@ public class ChamadoServico : IChamadoServico
     /// <exception cref="Exception">Lançada se o departamento não for encontrado ou se houver um erro ao atualizar o chamado.</exception>
     public async Task Atualizar(AtualizarChamadoViewModel chamadoViewModel)
     {
-        if (IsDataRetroativa(chamadoViewModel.DataAbertura))
-        {
-            throw new ArgumentException("Data de abertura retroativa não permitida ", nameof(chamadoViewModel.DataAbertura));
-        }
-
         //Verifica se o departamento existe
         // Se não existir, lança uma exceção
         var departamento = await _departamentoRepositorio.GetByIdAsync(chamadoViewModel.IdDepartamento);

@@ -5,8 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Configura o ambiente da aplicação
 // Configura os clients para acessar as APIs
-builder.Services
+builder
+    .ConfigurarAmbiente()
     .ConfigurarClients();
 
 var app = builder.Build();
