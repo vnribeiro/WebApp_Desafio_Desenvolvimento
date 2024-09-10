@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿$(function () {
     $('.glyphicon-calendar').closest("div.date").datepicker({
         todayBtn: "linked",
         keyboardNavigation: false,

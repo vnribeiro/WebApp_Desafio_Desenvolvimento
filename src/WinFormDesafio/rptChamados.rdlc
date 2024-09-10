@@ -522,7 +522,7 @@ Comercial: 0800 123 1184</Value>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>0dabc88c-9d9c-4337-8ca7-e461de376997</rd:DataSourceID>
+      <rd:DataSourceID>2afa4ff7-523f-46fa-b9b1-0c24eb75149a</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -534,7 +534,7 @@ Comercial: 0800 123 1184</Value>
       <Fields>
         <Field Name="ID">
           <DataField>ID</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
+          <rd:TypeName>System.Guid</rd:TypeName>
         </Field>
         <Field Name="Assunto">
           <DataField>Assunto</DataField>
@@ -555,8 +555,11 @@ Comercial: 0800 123 1184</Value>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsChamados</rd:DataSetName>
-        <rd:SchemaPath>E:\NETSPEED\PROJETOS\DOTNET\WinForms_Desafio_Desenvolvimento\WinForms_Desafio_Desenvolvimento\Relatorios\dsChamados.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Dev\Projects\WebApp_Desafio_Desenvolvimento\src\WinFormDesafio\dsChamados.xsd</rd:SchemaPath>
         <rd:TableName>Table</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

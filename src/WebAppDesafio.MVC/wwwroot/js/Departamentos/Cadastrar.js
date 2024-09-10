@@ -1,5 +1,5 @@
-﻿$(document).ready(function () {
-    $('#btnSalvar').click(function () {
+﻿$(function () {
+    $('#btnSalvar').on('click', function () {
 
         // Verifica se o formulário é válido
         if (!validarFormulario()) {
@@ -11,7 +11,7 @@
         let url = $('#form').attr('action');
 
         $.ajax({
-            type: "POST",
+            method: "POST",
             url: url,
             data: {
                 Descricao: data.Descricao

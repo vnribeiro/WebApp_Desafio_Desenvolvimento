@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace WinFormDesafio {
+namespace WebAppDesafio.MVC.wwwroot.reports {
     
     
     /// <summary>
@@ -406,6 +406,7 @@ namespace WinFormDesafio {
                 base.Columns.Add(this.columnID);
                 this.columnDescricao = new global::System.Data.DataColumn("Descricao", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescricao);
+                this.columnID.Caption = "Id";
                 this.ExtendedProperties.Add("Generator_RowClassName", "TableRow");
                 this.ExtendedProperties.Add("Generator_RowEvArgName", "TableRowChangeEvent");
                 this.ExtendedProperties.Add("Generator_RowEvHandlerName", "TableRowChangeEventHandler");

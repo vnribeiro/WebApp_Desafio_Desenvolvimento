@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace WinFormDesafio {
+namespace WebAppDesafio.MVC.wwwroot.reports {
     
     
     /// <summary>
@@ -20,9 +20,9 @@ namespace WinFormDesafio {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("dsDepartamentos")]
+    [global::System.Xml.Serialization.XmlRootAttribute("dsChamados")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class dsDepartamentos : global::System.Data.DataSet {
+    public partial class dsChamados : global::System.Data.DataSet {
         
         private TableDataTable tableTable;
         
@@ -30,7 +30,7 @@ namespace WinFormDesafio {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public dsDepartamentos() {
+        public dsChamados() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace WinFormDesafio {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        protected dsDepartamentos(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected dsChamados(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -127,7 +127,7 @@ namespace WinFormDesafio {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            dsDepartamentos cln = ((dsDepartamentos)(base.Clone()));
+            dsChamados cln = ((dsChamados)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -199,7 +199,7 @@ namespace WinFormDesafio {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "dsDepartamentos";
+            this.DataSetName = "dsChamados";
             this.Prefix = "";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
@@ -224,7 +224,7 @@ namespace WinFormDesafio {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            dsDepartamentos ds = new dsDepartamentos();
+            dsChamados ds = new dsChamados();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -280,7 +280,13 @@ namespace WinFormDesafio {
             
             private global::System.Data.DataColumn columnID;
             
-            private global::System.Data.DataColumn columnDescricao;
+            private global::System.Data.DataColumn columnAssunto;
+            
+            private global::System.Data.DataColumn columnSolicitante;
+            
+            private global::System.Data.DataColumn columnDepartamento;
+            
+            private global::System.Data.DataColumn columnDataAbertura;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -325,9 +331,33 @@ namespace WinFormDesafio {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn DescricaoColumn {
+            public global::System.Data.DataColumn AssuntoColumn {
                 get {
-                    return this.columnDescricao;
+                    return this.columnAssunto;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn SolicitanteColumn {
+                get {
+                    return this.columnSolicitante;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DepartamentoColumn {
+                get {
+                    return this.columnDepartamento;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DataAberturaColumn {
+                get {
+                    return this.columnDataAbertura;
                 }
             }
             
@@ -368,11 +398,14 @@ namespace WinFormDesafio {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public TableRow AddTableRow(System.Guid ID, string Descricao) {
+            public TableRow AddTableRow(System.Guid ID, string Assunto, string Solicitante, string Departamento, string DataAbertura) {
                 TableRow rowTableRow = ((TableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
-                        Descricao};
+                        Assunto,
+                        Solicitante,
+                        Departamento,
+                        DataAbertura};
                 rowTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTableRow);
                 return rowTableRow;
@@ -396,7 +429,10 @@ namespace WinFormDesafio {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
                 this.columnID = base.Columns["ID"];
-                this.columnDescricao = base.Columns["Descricao"];
+                this.columnAssunto = base.Columns["Assunto"];
+                this.columnSolicitante = base.Columns["Solicitante"];
+                this.columnDepartamento = base.Columns["Departamento"];
+                this.columnDataAbertura = base.Columns["DataAbertura"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -404,8 +440,15 @@ namespace WinFormDesafio {
             private void InitClass() {
                 this.columnID = new global::System.Data.DataColumn("ID", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID);
-                this.columnDescricao = new global::System.Data.DataColumn("Descricao", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDescricao);
+                this.columnAssunto = new global::System.Data.DataColumn("Assunto", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAssunto);
+                this.columnSolicitante = new global::System.Data.DataColumn("Solicitante", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSolicitante);
+                this.columnDepartamento = new global::System.Data.DataColumn("Departamento", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDepartamento);
+                this.columnDataAbertura = new global::System.Data.DataColumn("DataAbertura", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDataAbertura);
+                this.columnID.Caption = "Id";
                 this.ExtendedProperties.Add("Generator_RowClassName", "TableRow");
                 this.ExtendedProperties.Add("Generator_RowEvArgName", "TableRowChangeEvent");
                 this.ExtendedProperties.Add("Generator_RowEvHandlerName", "TableRowChangeEventHandler");
@@ -480,7 +523,7 @@ namespace WinFormDesafio {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsDepartamentos ds = new dsDepartamentos();
+                dsChamados ds = new dsChamados();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -571,17 +614,65 @@ namespace WinFormDesafio {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Descricao {
+            public string Assunto {
                 get {
                     try {
-                        return ((string)(this[this.tableTable.DescricaoColumn]));
+                        return ((string)(this[this.tableTable.AssuntoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Descricao\' in table \'Table\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Assunto\' in table \'Table\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTable.DescricaoColumn] = value;
+                    this[this.tableTable.AssuntoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Solicitante {
+                get {
+                    try {
+                        return ((string)(this[this.tableTable.SolicitanteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Solicitante\' in table \'Table\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTable.SolicitanteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Departamento {
+                get {
+                    try {
+                        return ((string)(this[this.tableTable.DepartamentoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Departamento\' in table \'Table\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTable.DepartamentoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DataAbertura {
+                get {
+                    try {
+                        return ((string)(this[this.tableTable.DataAberturaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DataAbertura\' in table \'Table\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTable.DataAberturaColumn] = value;
                 }
             }
             
@@ -599,14 +690,50 @@ namespace WinFormDesafio {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsDescricaoNull() {
-                return this.IsNull(this.tableTable.DescricaoColumn);
+            public bool IsAssuntoNull() {
+                return this.IsNull(this.tableTable.AssuntoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetDescricaoNull() {
-                this[this.tableTable.DescricaoColumn] = global::System.Convert.DBNull;
+            public void SetAssuntoNull() {
+                this[this.tableTable.AssuntoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsSolicitanteNull() {
+                return this.IsNull(this.tableTable.SolicitanteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetSolicitanteNull() {
+                this[this.tableTable.SolicitanteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDepartamentoNull() {
+                return this.IsNull(this.tableTable.DepartamentoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDepartamentoNull() {
+                this[this.tableTable.DepartamentoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDataAberturaNull() {
+                return this.IsNull(this.tableTable.DataAberturaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDataAberturaNull() {
+                this[this.tableTable.DataAberturaColumn] = global::System.Convert.DBNull;
             }
         }
         

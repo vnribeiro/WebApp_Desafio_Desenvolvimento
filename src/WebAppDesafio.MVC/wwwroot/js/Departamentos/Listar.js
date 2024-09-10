@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿$(function () {
 
     var table = $('#dataTables-Departamentos').DataTable({
         paging: false,
@@ -7,7 +7,10 @@
         searching: false,
         processing: true,
         serverSide: true,
-        ajax: config.contextPath + 'Departamentos/Datatable',
+        ajax: {
+            url: config.contextPath + 'Departamentos/Datatable',
+            type: 'GET'
+        },
         columns: [
             { data: 'id', title: 'ID' },
             { data: 'descricao', title: 'Descrição' },
@@ -23,15 +26,15 @@
         }
     });
 
-    $('#btnRelatorio').click(function () {
+    $('#btnRelatorio').on('click', function () {
         window.location.href = config.contextPath + 'Departamentos/Report';
     });
 
-    $('#btnAdicionar').click(function () {
+    $('#btnAdicionar').on('click', function () {
         window.location.href = config.contextPath + 'Departamentos/Cadastrar';
     });
 
-    $('#btnEditar').click(function () {
+    $('#btnEditar').on('click', function () {
         var data = table.row('.selected').data();
 
         if (data != undefined) {
@@ -57,7 +60,7 @@
         }
     });
 
-    $('#btnExcluir').click(function () {
+    $('#btnExcluir').on('click', function () {
 
         let data = table.row('.selected').data();
 
@@ -68,7 +71,7 @@
         if (data.id) {
             Swal.fire({
                 text: "Tem certeza de que deseja excluir " + data.assunto + " ?",
-                type: "warning",
+                icon: "warning",
                 showCancelButton: true,
             }).then(function (result) {
                 if (result.value) {
@@ -79,7 +82,6 @@
                         success: function (result) {
                             Swal.fire({
                                 icon: 'success',
-                                type: result.type,
                                 title: result.title,
                                 text: result.message,
                             }).then(function () {
@@ -90,7 +92,7 @@
                             Swal.fire({
                                 icon: 'error',
                                 confirmButtonText: 'OK',
-                                type: result.responseJSON.type,
+                                title: result.responseJSON.title,
                                 text: result.responseJSON.message,
                             });
                         }

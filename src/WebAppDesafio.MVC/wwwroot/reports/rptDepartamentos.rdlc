@@ -115,6 +115,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -170,7 +171,7 @@
         <DataSetName>dsDepartamentos</DataSetName>
         <Top>0.28787cm</Top>
         <Height>1.2cm</Height>
-        <Width>22.68538cm</Width>
+        <Width>22.68539cm</Width>
         <Style>
           <Border>
             <Style>None</Style>

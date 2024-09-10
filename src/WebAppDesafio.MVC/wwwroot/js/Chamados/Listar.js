@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿$(function () {
 
     var table = $('#dataTables-Chamados').DataTable({
         paging: false,
@@ -7,7 +7,10 @@
         searching: false,
         processing: true,
         serverSide: true,
-        ajax: config.contextPath + 'Chamados/Datatable',
+        ajax: {
+            url: config.contextPath + 'Chamados/Datatable',
+            type: 'GET'
+        },
         columns: [
             { data: 'id', title: 'ID' },
             { data: 'assunto', title: 'Assunto' },
@@ -18,26 +21,21 @@
     });
 
     $('#dataTables-Chamados tbody').on('click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-        } else {
-            table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-        }
+        $(this).toggleClass('selected');
     });
 
-    $('#btnRelatorio').click(function () {
+    $('#btnRelatorio').on('click', function () {
         window.location.href = config.contextPath + 'Chamados/Report';
     });
 
-    $('#btnAdicionar').click(function () {
+    $('#btnAdicionar').on('click', function () {
         window.location.href = config.contextPath + 'Chamados/Cadastrar';
     });
 
-    $('#btnEditar').click(function () {
+    $('#btnEditar').on('click', function () {
         var data = table.row('.selected').data();
 
-        if (data != undefined) {
+        if (data) {
             var queryString = $.param({
                 id: data.id,
                 assunto: data.assunto,
@@ -53,7 +51,7 @@
     $('#dataTables-Chamados tbody').on('dblclick', 'tr', function () {
         var data = table.row(this).data();
 
-        if (data != undefined) {
+        if (data) {
             var queryString = $.param({
                 id: data.id,
                 assunto: data.assunto,
@@ -66,16 +64,10 @@
         }
     });
 
-    $('#btnExcluir').click(function () {
+    $('#btnExcluir').on('click', function () {
+        var data = table.row('.selected').data();
 
-        let data = table.row('.selected').data();
-
-        if (data == undefined || !data.id)
-        {
-            return;
-        }
-
-        if (data.id) {
+        if (data && data.id) {
             Swal.fire({
                 text: "Tem certeza de que deseja excluir " + data.assunto + " ?",
                 type: "warning",
@@ -103,7 +95,7 @@
                                 type: result.responseJSON.type,
                                 text: result.responseJSON.message,
                             });
-                        }                    
+                        }
                     });
                 } else {
                     console.log("Cancelou a exclusão.");

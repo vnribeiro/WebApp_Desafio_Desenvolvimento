@@ -1,5 +1,5 @@
-﻿$(document).ready(function () {
-    $('#btnSalvar').click(function () {
+﻿$(function () {
+    $(document).on('click', '#btnSalvar', function () {
 
         // Verifica se o formulário é válido
         if (!validarFormulario()) {
@@ -10,7 +10,7 @@
         let chamado = SerielizeForm($('#form'));
 
         $.ajax({
-            type: "PATCH",
+            method: "PATCH",
             url: config.contextPath + 'Chamados/Atualizar/' + chamado.Id,
             contentType: "application/json",
             data: JSON.stringify({

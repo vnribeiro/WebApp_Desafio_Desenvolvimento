@@ -7,6 +7,51 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\reports\dsChamados.Designer.cs" />
+    <Content Remove="wwwroot\reports\dsChamados.xsc" />
+    <Content Remove="wwwroot\reports\dsChamados.xsd" />
+    <Content Remove="wwwroot\reports\dsChamados.xss" />
+    <Content Remove="wwwroot\reports\dsDepartamentos.Designer.cs" />
+    <Content Remove="wwwroot\reports\dsDepartamentos.xsc" />
+    <Content Remove="wwwroot\reports\dsDepartamentos.xsd" />
+    <Content Remove="wwwroot\reports\dsDepartamentos.xss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="wwwroot\reports\dsChamados.Designer.cs">
+      <DependentUpon>dsChamados.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="wwwroot\reports\dsDepartamentos.Designer.cs">
+      <DependentUpon>dsDepartamentos.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\reports\dsChamados.xsc" />
+    <None Include="wwwroot\reports\dsChamados.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>dsChamados.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\reports\dsChamados.xss" />
+    <None Include="wwwroot\reports\dsDepartamentos.xsc" />
+    <None Include="wwwroot\reports\dsDepartamentos.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>dsDepartamentos.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\reports\dsDepartamentos.xss" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="ReportViewerCore.NETCore" Version="15.1.22" />
   </ItemGroup>
@@ -439,6 +484,12 @@
     <Content Update="wwwroot\lib\sweetalert2\sweetalert2.min.css">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\reports\rptChamados.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\reports\rptDepartamentos.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

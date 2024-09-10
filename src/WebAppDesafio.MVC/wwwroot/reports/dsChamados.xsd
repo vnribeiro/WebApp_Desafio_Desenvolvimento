@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsChamados" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsChamados" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsChamados" msprop:Generator_DataSetName="dsChamados">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Table" msprop:Generator_RowClassName="TableRow" msprop:Generator_RowEvHandlerName="TableRowChangeEventHandler" msprop:Generator_RowDeletedName="TableRowDeleted" msprop:Generator_RowDeletingName="TableRowDeleting" msprop:Generator_RowEvArgName="TableRowChangeEvent" msprop:Generator_TablePropName="Table" msprop:Generator_RowChangedName="TableRowChanged" msprop:Generator_UserTableName="Table" msprop:Generator_RowChangingName="TableRowChanging" msprop:Generator_TableClassName="TableDataTable" msprop:Generator_TableVarName="tableTable">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:Caption="Id" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" type="xs:string" minOccurs="0" />
+              <xs:element name="Assunto" msprop:Generator_UserColumnName="Assunto" msprop:Generator_ColumnPropNameInTable="AssuntoColumn" msprop:Generator_ColumnPropNameInRow="Assunto" msprop:Generator_ColumnVarNameInTable="columnAssunto" type="xs:string" minOccurs="0" />
+              <xs:element name="Solicitante" msprop:Generator_UserColumnName="Solicitante" msprop:Generator_ColumnPropNameInTable="SolicitanteColumn" msprop:Generator_ColumnPropNameInRow="Solicitante" msprop:Generator_ColumnVarNameInTable="columnSolicitante" type="xs:string" minOccurs="0" />
+              <xs:element name="Departamento" msprop:Generator_UserColumnName="Departamento" msprop:Generator_ColumnPropNameInTable="DepartamentoColumn" msprop:Generator_ColumnPropNameInRow="Departamento" msprop:Generator_ColumnVarNameInTable="columnDepartamento" type="xs:string" minOccurs="0" />
+              <xs:element name="DataAbertura" msprop:Generator_UserColumnName="DataAbertura" msprop:Generator_ColumnPropNameInTable="DataAberturaColumn" msprop:Generator_ColumnPropNameInRow="DataAbertura" msprop:Generator_ColumnVarNameInTable="columnDataAbertura" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

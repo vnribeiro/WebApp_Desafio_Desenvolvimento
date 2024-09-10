@@ -272,11 +272,11 @@ namespace WebAppDesafio.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Report()
         {
+            // Carrega os dados que serão apresentados no relatório
             var response = await _chamadoClient.GetChamados();
-
             var chamados = response.Dados.Select(x => new
             {
-                Id = x.Id,
+                ID = x.Id,
                 Assunto = x.Assunto,
                 Solicitante = x.Solicitante,
                 Departamento = x.Departamento.Descricao,
@@ -292,7 +292,6 @@ namespace WebAppDesafio.MVC.Controllers
                 localReport.LoadReportDefinition(reportStream);
             }
 
-            // Carrega os dados que serão apresentados no relatório
             localReport.DataSources.Add(new ReportDataSource("dsChamados", chamados));
 
             // Renderiza o relatório em PDF

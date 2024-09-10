@@ -205,6 +205,14 @@ namespace WebAppDesafio.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Report()
         {
+            // Carrega os dados que serão apresentados no relatório
+            var response = await _departamentoClient.GetDepartamentos();
+            var departamentos = response.Dados.Select(x => new
+            {
+                ID = x.Id,
+                Descricao = x.Descricao.Trim()
+            });
+
             var contentRootPath = _hostEnvironment!.ContentRootPath;
             var path = Path.Combine(contentRootPath, "wwwroot", "reports", "rptDepartamentos.rdlc");
 
@@ -214,9 +222,7 @@ namespace WebAppDesafio.MVC.Controllers
                 localReport.LoadReportDefinition(reportStream);
             }
 
-            // Carrega os dados que serão apresentados no relatório
-            var response = await _departamentoClient.GetDepartamentos();
-            localReport.DataSources.Add(new ReportDataSource("dsDepartamentos", response.Dados));
+            localReport.DataSources.Add(new ReportDataSource("dsDepartamentos", departamentos));
 
             // Renderiza o relatório em PDF
             var reportResult = localReport.Render("PDF");

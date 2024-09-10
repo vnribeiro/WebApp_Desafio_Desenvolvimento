@@ -1,5 +1,5 @@
-﻿$(document).ready(function () {
-    $('#btnCancelar').click(function () {
+﻿$(function () {
+    $('#btnCancelar').on("click", function () {
         Swal.fire({
             html: "Deseja cancelar essa operação? O registro não será salvo.",
             type: "warning",

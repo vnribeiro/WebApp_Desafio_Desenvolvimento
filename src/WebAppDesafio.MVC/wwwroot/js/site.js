@@ -10,7 +10,7 @@ function FormularioInvalidoAlert(form) {
     }
     let msg = "";
     let errElem = {};
-    for (var i = 0; i < mensagensDeErro.length; i++) {
+    for (let i = 0; i < mensagensDeErro.length; i++) {
         if (mensagensDeErro[i].children.length > 0) {
             msg = mensagensDeErro[i].children[0].innerHTML;
             errElem = mensagensDeErro[i].children[0];
@@ -33,7 +33,7 @@ function FormularioInvalidoAlert(form) {
                 let id = errElem.id.replace("-error", "");
                 setTimeout(function () {
                     try {
-                        $("#" + id).focus();
+                        $("#" + id)[0].focus();
                     } catch (e) {
                         console.log(e);
                         console.log(errElem);
@@ -93,8 +93,8 @@ function SerielizeForm(form) {
     return json;
 }
 
-$(document).ready(function () {
-    $('#btnCancelar').click(function () {
+$(function () {
+    $('#btnCancelar').on("click", function () {
         Swal.fire({
             html: "Deseja cancelar essa operação? O registro não será salvo.",
             type: "warning",

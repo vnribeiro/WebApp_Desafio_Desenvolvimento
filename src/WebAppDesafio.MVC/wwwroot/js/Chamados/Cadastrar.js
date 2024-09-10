@@ -1,5 +1,5 @@
-﻿$(document).ready(function () {
-    $('#btnSalvar').click(function () {
+﻿$(function () {
+    $('#btnSalvar').on('click', function () {
         // Verifica se o formulário é válido
         if (!validarFormulario()) {
             FormularioInvalidoAlert($('#form'));
@@ -10,7 +10,7 @@
         let url = $('#form').attr('action');
 
         $.ajax({
-            type: "POST",
+            method: "POST",
             url: url,
             data: {
                 Assunto: chamado.Assunto,
@@ -45,7 +45,7 @@
         source: function (request, response) {
             $.ajax({
                 url: config.contextPath + "Chamados/Solicitantes",
-                type: "GET",
+                method: "GET",
                 data: {
                     Solicitante: request.term
                 },
@@ -57,6 +57,6 @@
                 }
             });
         },
-        minLength: 2
+        minLength: 3
     });
 });

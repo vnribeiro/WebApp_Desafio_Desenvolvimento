@@ -44,10 +44,11 @@ public class ChamadoRepositorio : IChamadoRepositorio
     public async Task<IEnumerable<string>> GetSolicitanteAsync(string nome)
     {
         return await _context.Chamados
-            .Where(x => x.Solicitante.Contains(nome))
+            .Where(x => x.Solicitante.ToUpper()
+                .Contains(nome.ToUpper()))
             .Select(x => x.Solicitante)
             .Distinct()
-            .ToListAsync(); 
+            .ToListAsync();
     }
 
     /// <summary>

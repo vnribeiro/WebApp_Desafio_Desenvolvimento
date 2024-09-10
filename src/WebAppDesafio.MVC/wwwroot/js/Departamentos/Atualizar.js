@@ -1,5 +1,5 @@
-﻿$(document).ready(function () {
-    $('#btnSalvar').click(function () {
+﻿$(function () {
+    $('#btnSalvar').on('click', function () {
 
         // Verifica se o formulário é válido
         if (!validarFormulario()) {
@@ -10,9 +10,11 @@
         let departamento = SerielizeForm($('#form'));
 
         $.ajax({
-            type: "PATCH",
-            url: config.contextPath + 'Departamentos/Atualizar/' + departamento.Id,
-            contentType: "application/json",
+            method: "PATCH",
+            url: `${config.contextPath}Departamentos/Atualizar/${departamento.Id}`,
+            headers: {
+                "Content-Type": "application/json"
+            },
             data: JSON.stringify({
                 Id: departamento.Id,
                 Descricao: departamento.Descricao,
@@ -25,7 +27,7 @@
                     title: result.title,
                     text: result.message,
                 }).then(function () {
-                    window.location.href = config.contextPath + result.controller + '/' + result.action;
+                    window.location.href = `${config.contextPath}${result.controller}/${result.action}`;
                 });
             },
             error: function (result) {
