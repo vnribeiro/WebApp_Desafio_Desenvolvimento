@@ -35,6 +35,13 @@ function validarFormulario() {
         isValid = false;
     }
 
+    // Validação do campo Data de Abertura
+    // não pode ser vazia
+    if (!$('#DataAbertura').val()) {
+        $('#DataAbertura').closest('.form-group').find('.text-danger').text('O campo Data de Abertura é obrigatório.');
+        isValid = false;
+    }
+
     return isValid;
 }
 
@@ -55,10 +62,7 @@ function validarDataAbertura(dateString) {
     // Validação do campo Data de Abertura
     var dataAbertura = $('#DataAbertura').val().trim();
 
-    if (!dataAbertura) {
-        $('#DataAbertura').closest('.form-group').find('.text-danger').text('O campo Data de Abertura é obrigatório.');
-        isValid = false;
-    } else if (isRetroactive(dataAbertura)) {
+    if (isRetroactive(dataAbertura)) {
         $('#DataAbertura').closest('.form-group').find('.text-danger').text('A Data de Abertura não pode ser retroativa.');
         isValid = false;
     }

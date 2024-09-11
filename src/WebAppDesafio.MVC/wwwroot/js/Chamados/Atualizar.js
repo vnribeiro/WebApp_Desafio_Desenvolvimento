@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $(document).on('click', '#btnSalvar', function () {
+    $(document).on('click', '#btnSalvar', function (e) {
 
         // Verifica se o formulário é válido
         if (!validarFormulario()) {
@@ -7,7 +7,11 @@
             return;
         }
 
-        chamado = SerielizeForm($('#form'));
+        let chamado = SerielizeForm($('#form'));
+        let idDepartamento = $('#Departamento').val();
+
+        // Converte a data de abertura para DateTime
+        let dataAbertura = new Date(chamado.DataAbertura);
 
         $.ajax({
             method: "PATCH",
@@ -19,8 +23,8 @@
                 Id: chamado.Id,
                 Assunto: chamado.Assunto,
                 Solicitante: chamado.Solicitante,
-                IdDepartamento: $('#Departamento').val(),
-                DataAbertura: chamado.DataAbertura,
+                IdDepartamento: idDepartamento,
+                DataAbertura: dataAbertura,
             }),
             success: function (result) {
                 console.log(result.message);
