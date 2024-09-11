@@ -27,8 +27,8 @@ public static class ConfiguracaoAplicacaoExtensions
     /// <summary>
     /// Configura os clientes HTTP para acessar as APIs de Departamento e Chamado.
     /// </summary>
-    /// <param name="service">A coleção de serviços para adicionar os clientes HTTP.</param>
-    /// <returns>A coleção de serviços com os clientes HTTP configurados.</returns>
+    /// <param name="builder">O construtor da aplicação web para adicionar os clientes HTTP.</param>
+    /// <returns>O construtor da aplicação web com os clientes HTTP configurados.</returns>
     public static WebApplicationBuilder ConfigurarClients(this WebApplicationBuilder builder)
     {
         var baseUrl = builder.Configuration[BaseUrl];
