@@ -27,11 +27,11 @@ function FormularioInvalidoAlert(form) {
             type: "warning",
             title: "Atenção",
             text: msg,
-        }).then(function (result) {
+        }).then((result) => {
             if (errElem) {
                 //Padrão mvc
                 let id = errElem.id.replace("-error", "");
-                setTimeout(function () {
+                setTimeout(() => {
                     try {
                         $("#" + id)[0].focus();
                     } catch (e) {
@@ -57,12 +57,11 @@ function SerielizeForm(form) {
 
     let serArr = form.serializeArray();
 
-    $.each(serArr, function (i, field) {
+    $.each(serArr, (i, field) => {
         if (json[field.name] == undefined) {
             //strings enviadas para o backend apontando para propiedades decimal são automaticamente convertidas pelo asp
             //porem devem estar no formato correto. Com apenas uma separação...  virgula ou ponto 
             //#######,####### ou #######.#######
-
             //verifica se o campo no formulário/html possui determinada classe/mascara
             let element = $('#' + field.name);
 
@@ -85,7 +84,6 @@ function SerielizeForm(form) {
             //        ElementoOriginal: { Name: field.name, Value: json[field.name] },
             //        ElementoDuplicado: { Name: field.name, Value: field.value },
             //    });
-
             //throw exception?? 
             //se ocorrer um erro no servidor normalmente não troca a pagina então da pra diagnosticar pelo console...
         }
@@ -93,13 +91,13 @@ function SerielizeForm(form) {
     return json;
 }
 
-$(function () {
-    $('#btnCancelar').on("click", function () {
+$(() => {
+    $('#btnCancelar').on("click", () => {
         Swal.fire({
             html: "Deseja cancelar essa operação? O registro não será salvo.",
             type: "warning",
             showCancelButton: true,
-        }).then(function (result) {
+        }).then((result) => {
             if (result.value) {
                 history.back();
             } else {

@@ -278,7 +278,7 @@ namespace WinFormDesafio {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class TableDataTable : global::System.Data.TypedTableBase<TableRow> {
             
-            private global::System.Data.DataColumn columnID;
+            private global::System.Data.DataColumn columnId;
             
             private global::System.Data.DataColumn columnAssunto;
             
@@ -323,9 +323,9 @@ namespace WinFormDesafio {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn IDColumn {
+            public global::System.Data.DataColumn IdColumn {
                 get {
-                    return this.columnID;
+                    return this.columnId;
                 }
             }
             
@@ -398,10 +398,10 @@ namespace WinFormDesafio {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public TableRow AddTableRow(System.Guid ID, string Assunto, string Solicitante, string Departamento, string DataAbertura) {
+            public TableRow AddTableRow(System.Guid Id, string Assunto, string Solicitante, string Departamento, string DataAbertura) {
                 TableRow rowTableRow = ((TableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        ID,
+                        Id,
                         Assunto,
                         Solicitante,
                         Departamento,
@@ -428,7 +428,7 @@ namespace WinFormDesafio {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
-                this.columnID = base.Columns["ID"];
+                this.columnId = base.Columns["Id"];
                 this.columnAssunto = base.Columns["Assunto"];
                 this.columnSolicitante = base.Columns["Solicitante"];
                 this.columnDepartamento = base.Columns["Departamento"];
@@ -438,8 +438,8 @@ namespace WinFormDesafio {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
-                this.columnID = new global::System.Data.DataColumn("ID", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnID);
+                this.columnId = new global::System.Data.DataColumn("Id", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId);
                 this.columnAssunto = new global::System.Data.DataColumn("Assunto", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAssunto);
                 this.columnSolicitante = new global::System.Data.DataColumn("Solicitante", typeof(string), null, global::System.Data.MappingType.Element);
@@ -597,17 +597,17 @@ namespace WinFormDesafio {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public System.Guid ID {
+            public System.Guid Id {
                 get {
                     try {
-                        return ((global::System.Guid)(this[this.tableTable.IDColumn]));
+                        return ((global::System.Guid)(this[this.tableTable.IdColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ID\' in table \'Table\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Id\' in table \'Table\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTable.IDColumn] = value;
+                    this[this.tableTable.IdColumn] = value;
                 }
             }
             
@@ -677,14 +677,14 @@ namespace WinFormDesafio {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsIDNull() {
-                return this.IsNull(this.tableTable.IDColumn);
+            public bool IsIdNull() {
+                return this.IsNull(this.tableTable.IdColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetIDNull() {
-                this[this.tableTable.IDColumn] = global::System.Convert.DBNull;
+            public void SetIdNull() {
+                this[this.tableTable.IdColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

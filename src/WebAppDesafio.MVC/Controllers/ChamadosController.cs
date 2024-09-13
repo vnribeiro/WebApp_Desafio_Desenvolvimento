@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
 using Microsoft.Reporting.NETCore;
 using Shared.ViewModels.Atualizar;
 using Shared.ViewModels.Criar;
@@ -278,19 +279,28 @@ namespace WebAppDesafio.MVC.Controllers
         /// Gera um relatório de chamados em formato PDF.
         /// </summary>
         /// <returns>Arquivo PDF do relatório de chamados.</returns>
-        [HttpGet]
-        public async Task<IActionResult> Report()
+        [HttpPost]
+        public async Task<IActionResult> Report([FromBody] ICollection<ChamadoViewModel> chamadosVm)
         {
-            // Carrega os dados que serão apresentados no relatório
-            var response = await _chamadoClient.GetChamados();
-            var chamados = response.Dados.Select(x => new
+            // Verifica se há dados para gerar o relatório
+            if (!chamadosVm.Any())
             {
-                ID = x.Id,
-                Assunto = x.Assunto,
-                Solicitante = x.Solicitante,
+                return BadRequest(new ResponseViewModel
+                {
+                    Type = AlertTypes.error,
+                    Message = "Falha ao gerar relatório"
+                });
+            }
+
+            //Map
+            var chamados = chamadosVm.Select(x => new 
+            {
+                x.Id,
+                x.Assunto,
+                x.Solicitante,
                 Departamento = x.Departamento.Descricao,
-                DataAbertura = x.DataAbertura
-            }).ToList();
+                x.DataAbertura
+            });
 
             var contentRootPath = _hostEnvironment!.ContentRootPath;
             var path = Path.Combine(contentRootPath, "wwwroot", "reports", "rptChamados.rdlc");
@@ -307,7 +317,7 @@ namespace WebAppDesafio.MVC.Controllers
             var reportResult = localReport.Render("PDF");
 
             //return File(reportResult.MainStream, "application/pdf");
-            return File(reportResult, "application/octet-stream", "rptChamados.pdf");
+            return File(reportResult, "application/pdf", "rptChamados.pdf");
         }
     }
 }

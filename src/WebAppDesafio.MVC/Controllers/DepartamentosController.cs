@@ -202,16 +202,17 @@ namespace WebAppDesafio.MVC.Controllers
         /// Gera um relatório de departamentos em formato PDF.
         /// </summary>
         /// <returns>Arquivo PDF do relatório de departamentos.</returns>
-        [HttpGet]
-        public async Task<IActionResult> Report()
+        [HttpPost]
+        public async Task<IActionResult> Report([FromBody] ICollection<DepartamentoViewModel> departamentosVm)
         {
-            // Carrega os dados que serão apresentados no relatório
-            var response = await _departamentoClient.GetDepartamentos();
-            var departamentos = response.Dados.Select(x => new
+            if (!departamentosVm.Any())
             {
-                ID = x.Id,
-                Descricao = x.Descricao
-            });
+                return BadRequest(new ResponseViewModel
+                {
+                    Type = AlertTypes.error,
+                    Message = "Falha ao gerar relatório"
+                });
+            }
 
             var contentRootPath = _hostEnvironment!.ContentRootPath;
             var path = Path.Combine(contentRootPath, "wwwroot", "reports", "rptDepartamentos.rdlc");
@@ -222,13 +223,13 @@ namespace WebAppDesafio.MVC.Controllers
                 localReport.LoadReportDefinition(reportStream);
             }
 
-            localReport.DataSources.Add(new ReportDataSource("dsDepartamentos", departamentos));
+            localReport.DataSources.Add(new ReportDataSource("dsDepartamentos", departamentosVm));
 
             // Renderiza o relatório em PDF
             var reportResult = localReport.Render("PDF");
 
             //return File(reportResult.MainStream, "application/pdf");
-            return File(reportResult, "application/octet-stream", "rptDepartamentos.pdf");
+            return File(reportResult, "application/pdf", "rptDepartamentos.pdf");
         }
     }
 }

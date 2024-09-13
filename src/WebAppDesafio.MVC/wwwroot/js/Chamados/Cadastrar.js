@@ -1,5 +1,5 @@
-﻿$(function () {
-    $('#btnSalvar').on('click', function () {
+﻿$(() => {
+    $('#btnSalvar').on('click', () => {
         // Verifica se o formulário é válido
         if (!validarFormulario() || !validarDataAbertura()) {
             FormularioInvalidoAlert($('#form'));
@@ -20,17 +20,17 @@
                 },
                 DataAbertura: chamado.DataAbertura,
             },
-            success: function (result) {
+            success: (result) => {
                 Swal.fire({
                     icon: 'success',
                     type: result.type,
                     title: result.title,
                     text: result.message,
-                }).then(function () {
+                }).then(() => {
                     window.location.href = config.contextPath + result.controller + '/' + result.action;
                 });
             },
-            error: function (result) {
+            error: (result) => {
                 Swal.fire({
                     icon: 'error',
                     confirmButtonText: 'OK',
@@ -42,21 +42,21 @@
     });
 
     $("#Solicitante").autocomplete({
-        source: function (request, response) {
+        source: (request, response) => {
             $.ajax({
                 url: config.contextPath + "Chamados/Solicitantes",
                 method: "GET",
                 data: {
                     Solicitante: request.term
                 },
-                success: function (data) {
+                success: (data) => {
                     response(data);
                 },
-                error: function (xhr, status, error) {
-                    console.error("Error fetching autocomplete data:", error);
+                error: (error) => {
+                    console.error("Erro ao buscar dados", error);
                 }
             });
         },
-        minLength: 3
+        minLength: 2
     });
 });

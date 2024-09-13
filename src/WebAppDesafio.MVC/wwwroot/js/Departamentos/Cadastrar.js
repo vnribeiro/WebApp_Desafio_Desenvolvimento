@@ -1,5 +1,5 @@
-﻿$(function () {
-    $('#btnSalvar').on('click', function () {
+﻿$(() => {
+    $('#btnSalvar').on('click', () => {
 
         // Verifica se o formulário é válido
         if (!validarFormulario()) {
@@ -16,17 +16,17 @@
             data: {
                 Descricao: data.Descricao
             },
-            success: function (result) {
+            success: (result) => {
                 Swal.fire({
                     icon: 'success',
                     type: result.type,
                     title: result.title,
                     text: result.message,
-                }).then(function () {
+                }).then(() => {
                     window.location.href = config.contextPath + result.controller + '/' + result.action;
                 });
             },
-            error: function (result) {
+            error: (result) => {
                 Swal.fire({
                     icon: 'error',
                     confirmButtonText: 'OK',

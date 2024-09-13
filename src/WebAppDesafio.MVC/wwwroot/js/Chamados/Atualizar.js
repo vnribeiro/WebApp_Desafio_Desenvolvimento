@@ -1,5 +1,5 @@
-﻿$(function () {
-    $(document).on('click', '#btnSalvar', function (e) {
+﻿$(() => {
+    $(document).on('click', '#btnSalvar', (e) => {
 
         // Verifica se o formulário é válido
         if (!validarFormulario()) {
@@ -26,18 +26,18 @@
                 IdDepartamento: idDepartamento,
                 DataAbertura: dataAbertura,
             }),
-            success: function (result) {
+            success: (result) => {
                 console.log(result.message);
                 Swal.fire({
                     icon: 'success',
                     type: result.type,
                     title: result.title,
                     text: result.message,
-                }).then(function () {
+                }).then(() => {
                     window.location.href = config.contextPath + result.controller + '/' + result.action;
                 });
             },
-            error: function (result) {
+            error: (result) => {
                 Swal.fire({
                     icon: 'error',
                     confirmButtonText: 'OK',

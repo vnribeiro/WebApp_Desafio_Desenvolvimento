@@ -197,21 +197,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ID">
+                    <Textbox Name="Id">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ID.Value</Value>
+                              <Value>=Fields!Id.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ID</rd:DefaultName>
+                      <rd:DefaultName>Id</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -343,6 +343,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -368,7 +369,6 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <KeepTogether>true</KeepTogether>
         <DataSetName>dsChamados</DataSetName>
         <Top>0.28787cm</Top>
         <Height>1.2cm</Height>
@@ -523,7 +523,7 @@ Comercial: 0800 123 1184</Value>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>e4e7ee55-42f6-49a8-85b5-7a9848264162</rd:DataSourceID>
+      <rd:DataSourceID>fb8eeaeb-803f-4d79-bafb-9dfab79090ae</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -533,9 +533,9 @@ Comercial: 0800 123 1184</Value>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="ID">
-          <DataField>ID</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
+        <Field Name="Id">
+          <DataField>Id</DataField>
+          <rd:TypeName>System.Guid</rd:TypeName>
         </Field>
         <Field Name="Assunto">
           <DataField>Assunto</DataField>
@@ -556,8 +556,11 @@ Comercial: 0800 123 1184</Value>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsChamados</rd:DataSetName>
-        <rd:SchemaPath>C:\Dev\Projects\WebApp_Desafio_Desenvolvimento\src\WebAppDesafio.MVC\wwwroot\reports\dsChamados.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Dev\Projects\WebApp_Desafio_Desenvolvimento\src\WinFormDesafio\dsChamados.xsd</rd:SchemaPath>
         <rd:TableName>Table</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

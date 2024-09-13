@@ -1,4 +1,4 @@
-﻿$(function () {
+﻿$(() => {
 
     var table = $('#dataTables-Chamados').DataTable({
         paging: false,
@@ -21,18 +21,45 @@
     });
 
     $('#dataTables-Chamados tbody').on('click', 'tr', function () {
-        $(this).toggleClass('selected');
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        } else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
     });
 
-    $('#btnRelatorio').on('click', function () {
-        window.location.href = config.contextPath + 'Chamados/Report';
+    $('#btnRelatorio').on('click', () => {
+        var data = table.rows().data().toArray();
+
+        $.ajax({
+            url: config.contextPath + 'Chamados/Report',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            xhrFields: {
+                responseType: 'blob' // Configura a resposta como um blob
+            },
+            success: (response) => {
+                // Cria um link temporário para baixar o PDF
+                var blob = new Blob([response], { type: 'application/pdf' });
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'rptChamados.pdf';
+                link.click();
+            },
+            error: (error) => {
+                console.error('Erro ao gerar relatório:', error);
+                alert("Falha ao gerar relatório");
+            }
+        });
     });
 
-    $('#btnAdicionar').on('click', function () {
+    $('#btnAdicionar').on('click', () => {
         window.location.href = config.contextPath + 'Chamados/Cadastrar';
     });
 
-    $('#btnEditar').on('click', function () {
+    $('#btnEditar').on('click', () => {
         var data = table.row('.selected').data();
 
         if (data) {
@@ -64,7 +91,7 @@
         }
     });
 
-    $('#btnExcluir').on('click', function () {
+    $('#btnExcluir').on('click', () => {
         var data = table.row('.selected').data();
 
         if (data && data.id) {
@@ -72,23 +99,23 @@
                 text: "Tem certeza de que deseja excluir " + data.assunto + " ?",
                 type: "warning",
                 showCancelButton: true,
-            }).then(function (result) {
+            }).then((result) => {
                 if (result.value) {
                     $.ajax({
                         url: config.contextPath + 'Chamados/Excluir/' + data.id,
                         type: 'DELETE',
                         contentType: 'application/json',
-                        success: function (result) {
+                        success: (result) => {
                             Swal.fire({
                                 icon: 'success',
                                 type: result.type,
                                 title: result.title,
                                 text: result.message,
-                            }).then(function () {
+                            }).then(() => {
                                 table.draw();
                             });
                         },
-                        error: function (result) {
+                        error: (result) => {
                             Swal.fire({
                                 icon: 'error',
                                 confirmButtonText: 'OK',

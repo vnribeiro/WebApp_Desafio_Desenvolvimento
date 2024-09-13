@@ -6,10 +6,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>7.29438cm</Width>
+              <Width>5.91855cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>15.39101cm</Width>
+              <Width>9.96704cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -52,7 +52,7 @@
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="Textbox7">
-                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -89,21 +89,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ID">
+                    <Textbox Name="Id">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ID.Value</Value>
+                              <Value>=Fields!Id.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ID</rd:DefaultName>
+                      <rd:DefaultName>Id</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -145,6 +145,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -167,10 +168,11 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <KeepTogether>true</KeepTogether>
         <DataSetName>dsDepartamentos</DataSetName>
         <Top>0.28787cm</Top>
         <Height>1.2cm</Height>
-        <Width>22.68539cm</Width>
+        <Width>15.88559cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -181,7 +183,7 @@
     <Height>2in</Height>
     <Style />
   </Body>
-  <Width>9.12917in</Width>
+  <Width>6.25417in</Width>
   <Page>
     <PageHeader>
       <Height>3.94229cm</Height>
@@ -209,7 +211,7 @@ Comercial: 0800 123 1184</Value>
           <Top>0.77639cm</Top>
           <Left>5.59222cm</Left>
           <Height>1.94938cm</Height>
-          <Width>17.09316cm</Width>
+          <Width>10.29337cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -239,7 +241,7 @@ Comercial: 0800 123 1184</Value>
           <rd:DefaultName>Textbox3</rd:DefaultName>
           <Left>5.55694cm</Left>
           <Height>0.6cm</Height>
-          <Width>17.12844cm</Width>
+          <Width>10.32865cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -286,7 +288,7 @@ Comercial: 0800 123 1184</Value>
           <rd:DefaultName>Textbox4</rd:DefaultName>
           <Top>2.90215cm</Top>
           <Height>0.6cm</Height>
-          <Width>22.68538cm</Width>
+          <Width>15.88559cm</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
@@ -321,7 +323,7 @@ Comercial: 0800 123 1184</Value>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>7d3bf732-83f1-4590-84c7-40466aead22c</rd:DataSourceID>
+      <rd:DataSourceID>445682e9-7a2b-48e0-82cf-189b41d060bb</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -331,8 +333,8 @@ Comercial: 0800 123 1184</Value>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="ID">
-          <DataField>ID</DataField>
+        <Field Name="Id">
+          <DataField>Id</DataField>
           <rd:TypeName>System.Guid</rd:TypeName>
         </Field>
         <Field Name="Descricao">

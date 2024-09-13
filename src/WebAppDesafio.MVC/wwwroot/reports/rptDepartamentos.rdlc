@@ -89,21 +89,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ID">
+                    <Textbox Name="Id">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ID.Value</Value>
+                              <Value>=Fields!Id.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ID</rd:DefaultName>
+                      <rd:DefaultName>Id</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -145,6 +145,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -322,7 +323,7 @@ Comercial: 0800 123 1184</Value>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>158b58d4-a645-4cb1-86a6-edeb2914fcd7</rd:DataSourceID>
+      <rd:DataSourceID>445682e9-7a2b-48e0-82cf-189b41d060bb</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -332,8 +333,8 @@ Comercial: 0800 123 1184</Value>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="ID">
-          <DataField>ID</DataField>
+        <Field Name="Id">
+          <DataField>Id</DataField>
           <rd:TypeName>System.Guid</rd:TypeName>
         </Field>
         <Field Name="Descricao">
@@ -343,7 +344,7 @@ Comercial: 0800 123 1184</Value>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsDepartamentos</rd:DataSetName>
-        <rd:SchemaPath>C:\Dev\Projects\WebApp_Desafio_Desenvolvimento\src\WebAppDesafio.MVC\wwwroot\reports\dsDepartamentos.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Dev\Projects\WebApp_Desafio_Desenvolvimento\src\WinFormDesafio\dsDepartamentos.xsd</rd:SchemaPath>
         <rd:TableName>Table</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />

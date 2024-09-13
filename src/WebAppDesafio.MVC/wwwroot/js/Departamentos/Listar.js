@@ -1,4 +1,4 @@
-﻿$(function () {
+﻿$(() => {
 
     var table = $('#dataTables-Departamentos').DataTable({
         paging: false,
@@ -26,15 +26,37 @@
         }
     });
 
-    $('#btnRelatorio').on('click', function () {
-        window.location.href = config.contextPath + 'Departamentos/Report';
+    $('#btnRelatorio').on('click', () => {
+        var data = table.rows().data().toArray();
+
+        $.ajax({
+            url: config.contextPath + 'Departamentos/Report',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            xhrFields: {
+                responseType: 'blob' // Configura a resposta como um blob
+            },
+            success: (response) => {
+                // Cria um link temporário para baixar o PDF
+                var blob = new Blob([response], { type: 'application/pdf' });
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'rptDepartamentos.pdf';
+                link.click();
+            },
+            error: (error) => {
+                console.error('Erro ao gerar relatório:', error);
+                alert("Falha ao gerar relatório");
+            }
+        });
     });
 
-    $('#btnAdicionar').on('click', function () {
+    $('#btnAdicionar').on('click', () => {
         window.location.href = config.contextPath + 'Departamentos/Cadastrar';
     });
 
-    $('#btnEditar').on('click', function () {
+    $('#btnEditar').on('click', () => {
         var data = table.row('.selected').data();
 
         if (data != undefined) {
@@ -60,7 +82,7 @@
         }
     });
 
-    $('#btnExcluir').on('click', function () {
+    $('#btnExcluir').on('click', () => {
 
         let data = table.row('.selected').data();
 
@@ -73,22 +95,22 @@
                 text: "Tem certeza de que deseja excluir " + data.assunto + " ?",
                 icon: "warning",
                 showCancelButton: true,
-            }).then(function (result) {
+            }).then((result) => {
                 if (result.value) {
                     $.ajax({
                         url: config.contextPath + 'Departamentos/Excluir/' + data.id,
                         type: 'DELETE',
                         contentType: 'application/json',
-                        success: function (result) {
+                        success: (result) => {
                             Swal.fire({
                                 icon: 'success',
                                 title: result.title,
                                 text: result.message,
-                            }).then(function () {
+                            }).then(() => {
                                 table.draw();
                             });
                         },
-                        error: function (result) {
+                        error: (result) => {
                             Swal.fire({
                                 icon: 'error',
                                 confirmButtonText: 'OK',
